@@ -16,3 +16,7 @@ variable "config_gcp_default_zone" {
   type = string
 }
 
+variable "config_project_id" {
+  description = "Default project to use when not specified"
+  type = string
+}
