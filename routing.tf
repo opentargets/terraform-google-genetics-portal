@@ -1,6 +1,4 @@
 // CLOUD ROUTERS --- //
-// TODO - Replace with modules
-//      https://github.com/terraform-google-modules/terraform-google-cloud-router
 module "cloud_router" {
   source  = "terraform-google-modules/cloud-router/google"
   version = "~> 0.4"
