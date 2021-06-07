@@ -1,5 +1,11 @@
 // --- Helper Information --- //
 locals {
+    // Helpers --- //
+    gcp_available_region_names_sorted = sort(data.google_compute_regions.gcp_available_regions.names)
+    gcp_available_zones_per_region = zipmap(
+        local.gcp_available_region_names_sorted,
+        [ for region_details in data.google_compute_zones.gcp_available_zones: region_details.names ]
+    )
   // Networking --- // 
   vpc_network_name             = "${var.config_release_name}-vpc"
   vpc_network_main_subnet_name = "main-subnet"
@@ -14,7 +20,8 @@ locals {
     ]
   )
   vpc_subnet_index = zipmap(
-    sort(data.google_compute_regions.gcp_available_regions.names),
-    range(0, length(data.google_compute_regions.gcp_available_regions.names))
+    local.gcp_available_region_names_sorted,
+    range(0, length(local.gcp_available_region_names_sorted))
   )
 }
+
