@@ -29,6 +29,13 @@ provider "google-beta" {
 data "google_compute_regions" "gcp_available_regions" {
 }
 
+// Availability Zones --- //
+data "google_compute_zones" "gcp_available_zones" {
+    count = length(local.gcp_available_region_names_sorted)
+
+    region = local.gcp_available_region_names_sorted[count.index]
+}
+
 // [--- Components ---] //
 // --- Elastic Search --- //
 // TODO
