@@ -11,6 +11,7 @@ module "firewall_rules" {
 
   // Keep in mind that logging is disabled for the defined firewall rules
   rules = [
+    // SSH
     {
       name        = "${var.config_release_name}-fw-allow-ssh-ingress"
       description = "Allow SSH INBOUND traffic to nodes tagged accordingly"
@@ -28,6 +29,7 @@ module "firewall_rules" {
       target_service_accounts = null
       log_config              = null
     },
+    // HTTP
     {
       name        = "${var.config_release_name}-fw-allow-http-ingress"
       description = "Allow HTTP INBOUND traffic to nodes tagged accordingly"
@@ -45,6 +47,7 @@ module "firewall_rules" {
       target_service_accounts = null
       log_config              = null
     },
+    // HTTPS
     {
       name        = "${var.config_release_name}-fw-allow-https-ingress"
       description = "Allow HTTPS INBOUND traffic to nodes tagged accordingly"
@@ -62,6 +65,7 @@ module "firewall_rules" {
       target_service_accounts = null
       log_config              = null
     },
+    // ICMP
     {
       name        = "${var.config_release_name}-fw-allow-icmp-ingress"
       description = "Allow ICMP INBOUND traffic to nodes tagged accordingly"
