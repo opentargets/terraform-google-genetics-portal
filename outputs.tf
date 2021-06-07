@@ -4,5 +4,5 @@ output "gcp_available_regions" {
 }
 
 output "subnet_indexing" {
-  value = local.subnet_index
+  value = local.vpc_subnet_index
 }
