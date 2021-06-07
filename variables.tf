@@ -5,3 +5,9 @@ variable "config_release_name" {
   type = string
 }
 
+// --- DEPLOYMENT CONFIGURATION --- //
+variable "config_gcp_default_region" {
+  description = "Default deployment region to use when not specified"
+  type = string
+}
+
