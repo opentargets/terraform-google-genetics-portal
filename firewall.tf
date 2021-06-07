@@ -67,7 +67,7 @@ module "firewall_rules" {
       description = "Allow ICMP INBOUND traffic to nodes tagged accordingly"
       direction   = "INGRESS"
       ranges      = ["0.0.0.0/0"]
-      target_tags = [local.fw_tag_https]
+      target_tags = null
       allow = [{
         protocol = "icmp"
         ports    = []
