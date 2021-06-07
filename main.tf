@@ -1,7 +1,7 @@
 // --- Open Targets Genetics Portal Infrastructure      --- //
 //  Author: Manuel Bernal Llinares <mbdebian@gmail.com> --- //
 
-// Providers --- //
+// --- Provider Configuration --- //
 terraform {
   required_providers {
     google = {
@@ -23,6 +23,10 @@ provider "google" {
 provider "google-beta" {
   region  = var.config_gcp_default_region
   project = var.config_project_id
+}
+
+// Availability Regions --- //
+data "google_compute_regions" "gcp_available_regions" {
 }
 
 // [--- Components ---] //
