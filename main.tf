@@ -24,3 +24,13 @@ provider "google-beta" {
   region  = var.config_gcp_default_region
   project = var.config_project_id
 }
+
+// [--- Components ---] //
+// --- Elastic Search --- //
+// TODO
+// --- Clickhouse --- //
+// TODO
+// --- API --- //
+// TODO
+// --- Web Application --- //
+// TODO
