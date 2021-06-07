@@ -20,3 +20,8 @@ variable "config_project_id" {
   description = "Default project to use when not specified"
   type = string
 }
+
+variable "config_deployment_regions" {
+  description = "A list of regions where to deploy the OT Platform"
+  type = list(string)
+}
