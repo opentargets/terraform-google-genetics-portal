@@ -6,6 +6,7 @@ locals {
     local.gcp_available_region_names_sorted,
     [for region_details in data.google_compute_zones.gcp_available_zones : region_details.names]
   )
+
   // Networking --- // 
   vpc_network_name             = "${var.config_release_name}-vpc"
   vpc_network_main_subnet_name = "main-subnet"
@@ -23,5 +24,11 @@ locals {
     local.gcp_available_region_names_sorted,
     range(0, length(local.gcp_available_region_names_sorted))
   )
+
+  // Firewall --- //
+  // Target Tags
+  fw_tag_ssh   = "ssh"
+  fw_tag_http  = "http"
+  fw_tag_https = "https"
 }
 
