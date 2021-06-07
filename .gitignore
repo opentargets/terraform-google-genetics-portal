@@ -1,0 +1,21 @@
+# Environment
+.env
+
+# Mac OS
+**/.DS_Store
+
+# Terraform state tracking
+.terraform*
+terraform.tfstate*
+
+# Terraform environment manipulation and profiles
+tfenv.active
+tfbackend.tf
+deployment_context.tfvars
+tfbackend.tf.bak
+
+# Temporary folders
+tmp/
+
+# Credentials
+credentials
