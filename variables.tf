@@ -11,3 +11,8 @@ variable "config_gcp_default_region" {
   type = string
 }
 
+variable "config_gcp_default_zone" {
+  description = "Default zone to use when not specified"
+  type = string
+}
+
