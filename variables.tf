@@ -25,3 +25,5 @@ variable "config_deployment_regions" {
   description = "A list of regions where to deploy the OT Platform"
   type = list(string)
 }
+
+// --- Platform Configuration --- //
