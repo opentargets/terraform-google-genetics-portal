@@ -1,2 +1,4 @@
-# terraform-google-genetics-portal
+# Introduction
 Repo for Genetics Portal deployment
+
+# TODOs
