@@ -5,7 +5,7 @@ resource "google_compute_instance" "inspection_vm" {
   count = length(var.config_deployment_regions) * local.inspection_conditional_deployment
 
   name = "${var.config_release_name}-inspection-vm-${count.index}"
-  machine_type = "e2-small"
+  machine_type = "n1-standard-1"
   zone = local.gcp_available_zones_per_region[var.config_deployment_regions[count.index]][0]
   project = var.config_project_id
   
