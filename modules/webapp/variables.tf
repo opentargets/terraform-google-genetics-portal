@@ -65,3 +65,41 @@ variable "website_not_found_page" {
   default = "index.html"
 }
 
+// --- Web Servers Configuration --- //
+// Networking --- //
+variable "network_name" {
+  description = "Name of the network where resources should be connected to, default 'default'"
+  type = string
+  default = "default"
+}
+
+variable "network_self_link" {
+  description = "Self link to the network where resources should be connected when deployed"
+  type = string
+  default = "default"
+}
+
+variable "network_subnet_name" {
+  description = "Name of the subnet, within the 'network_name', and the given region, where instances should be connected to, default 'main-subnet'"
+  type = string
+  default = "main-subnet"
+}
+
+variable "network_source_ranges_map" {
+  description = "CIDR that represents which IPs we want to grant access to the deployed resources"
+  type = any
+/*[
+    region = {
+      subnet_ip = "CIDR"
+    }
+  ]
+ */
+}
+
+variable "network_sources_health_checks" {
+  description = "Source CIDR for health checks, default '[ 130.211.0.0/22, 35.191.0.0/16 ]'"
+  default = [
+    "130.211.0.0/22",
+    "35.191.0.0/16"
+  ]
+}
