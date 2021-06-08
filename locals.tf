@@ -30,5 +30,9 @@ locals {
   fw_tag_ssh   = "ssh"
   fw_tag_http  = "http"
   fw_tag_https = "https"
+
+  // --- Development / Debugging Support --- //
+  inspection_enabled = var.config_enable_inspection
+  inspection_conditional_deployment = local.inspection_enabled ? 1 : 0
 }
 
