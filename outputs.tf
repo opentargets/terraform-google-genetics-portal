@@ -13,3 +13,8 @@ output "subnet_indexing" {
 output "subnetting_per_deployment_region" {
   value = local.vpc_network_region_subnet_map
 }
+
+// Inspection VMs --- //
+output "inspection_vms" {
+  value = local.inspection_enabled ? google_compute_instance.inspection_vm.* : []
+}
