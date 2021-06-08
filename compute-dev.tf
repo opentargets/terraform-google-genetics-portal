@@ -1,11 +1,22 @@
 // --- Compute resources deployed for supporting development / inspection activities --- //
 // Inspection VM --- //
+resource "random_string" "random_inspection_vm" {
+  length = 8
+  lower = true
+  upper = false
+  special = false
+  keepers = {
+    machine_type = var.config_inspection_vm_machine_type
+    vm_image = var.config_inspection_vm_image
+  }
+}
+
 resource "google_compute_instance" "inspection_vm" {
   // This definition will deploy a small VM in each deployment region for debugging communication and other infrastructure issues
   count = length(var.config_deployment_regions) * local.inspection_conditional_deployment
 
-  name = "${var.config_release_name}-inspection-vm-${count.index}"
-  machine_type = "n1-standard-1"
+  name = "${var.config_release_name}-inspection-vm-${count.index}-${random_string.random_inspection_vm.result}"
+  machine_type = var.config_inspection_vm_machine_type
   zone = local.gcp_available_zones_per_region[var.config_deployment_regions[count.index]][0]
   project = var.config_project_id
   
@@ -13,7 +24,7 @@ resource "google_compute_instance" "inspection_vm" {
 
   boot_disk {
     initialize_params {
-        image = "debian-cloud/debian-10"
+        image = var.config_inspection_vm_image
     }
   }
 
