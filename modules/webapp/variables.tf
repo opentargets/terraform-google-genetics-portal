@@ -103,3 +103,55 @@ variable "network_sources_health_checks" {
     "35.191.0.0/16"
   ]
 }
+// Compute Instances (VMs) --- //
+variable "webserver_deployment_regions" {
+  description = "List of regions where to deploy the web servers"
+  type = list(string)
+}
+
+variable "webserver_firewall_tags" {
+  description = "List of additional tags to attach to API nodes"
+  type = list(string)
+  default = [ ]
+}
+
+variable "webserver_docker_image_version" {
+  description = "NginX Docker image version to use in deployment"
+  type = string
+}
+
+variable "webserver_vm_vcpus" {
+  description = "CPU count, default '1'"
+  type = number
+  default = "1"
+}
+
+variable "webserver_vm_mem" {
+  description = "Amount of memory allocated Web Server nodes (MiB), default '3840'"
+  type = number
+  default = "3840"
+}
+
+variable "webserver_vm_image" {
+  description = "VM image to use for Web Server nodes, default 'cos-stable'"
+  type = string
+  default = "cos-stable"
+}
+
+variable "webserver_vm_image_project" {
+  description = "Project hosting the VM image, default 'cos-cloud'"
+  type = string
+  default = "cos-cloud"
+}
+
+variable "webserver_vm_boot_disk_size" {
+  description = "Boot disk size for Web Server nodes, default '10GB'"
+  type = string
+  default = "10GB"
+}
+
+variable "deployment_target_size" {
+  description = "Initial Web Server instance count per region"
+  type = number
+  default = 1
+}
