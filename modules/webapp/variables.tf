@@ -6,3 +6,8 @@ variable "module_wide_prefix_scope" {
   default = "mbdevgenwebapp"
 }
 
+variable "project_id" {
+  description = "Project ID where resources will be deployed"
+  type = string
+}
+
