@@ -58,3 +58,10 @@ variable "webapp_bucket_data_context_subfolder_name" {
   type = string
   default = "webapp"
 }
+// TODO Remove this in the next iteration, where the bucket is created in a different way
+variable "website_not_found_page" {
+  description = "It defines the website 'not found' page, default 'index.html', this no longer needs to be setup, because the bucket will not be serving the web application"
+  type = string
+  default = "index.html"
+}
+
