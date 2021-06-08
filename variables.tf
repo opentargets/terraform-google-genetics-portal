@@ -27,3 +27,9 @@ variable "config_deployment_regions" {
 }
 
 // --- Platform Configuration --- //
+
+// --- Development / Debugging Support --- //
+variable "config_enable_inspection" {
+  description = "If 'true', it will deploy additional VMs for infrastructure inspection, default 'false'"
+  default = false
+}
