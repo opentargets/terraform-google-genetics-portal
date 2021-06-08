@@ -17,3 +17,14 @@ variable "bucket_location" {
   default = "EUROPE-WEST4"
 }
 
+// --- Web APP Configuration --- //
+// Vanilla Bundle Information --- //
+variable "webapp_repo_name" {
+  description = "Web Application repository name"
+  type = string
+}
+
+variable "webapp_release" {
+  description = "Release version of the web application to deploy"
+  type = string
+}
