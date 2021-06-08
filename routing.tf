@@ -9,7 +9,7 @@ module "cloud_router" {
 
   project = var.config_project_id
   name    = "${var.config_release_name}-router-${count.index}"
-  network = "module.vpc_network.network_self_link"
+  network = module.vpc_network.network_self_link
   region  = var.config_deployment_regions[count.index]
 
   nats = [{
