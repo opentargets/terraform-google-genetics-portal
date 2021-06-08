@@ -155,3 +155,9 @@ variable "deployment_target_size" {
   type = number
   default = 1
 }
+
+// --- Temporary assets --- //
+variable "folder_tmp" {
+  description = "Path to a temporary folder where to deploy working directories"
+  type = string
+}
