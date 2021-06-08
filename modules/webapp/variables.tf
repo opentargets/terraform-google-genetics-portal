@@ -11,3 +11,9 @@ variable "project_id" {
   type = string
 }
 
+variable "bucket_location" {
+  description = "This input value sets the bucket's location. Multi-Region or Regional buckets location values are supported, see https://cloud.google.com/storage/docs/locations#location-mr for more information. By default, the bucket is regional, location 'EUROPE-WEST4'"
+  type = string
+  default = "EUROPE-WEST4"
+}
+
