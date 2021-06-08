@@ -28,3 +28,11 @@ variable "webapp_release" {
   description = "Release version of the web application to deploy"
   type = string
 }
+// Operational Context --- //
+variable "webapp_deployment_context" {
+  description = "Values for parameterising the deployment of the web application, see defaults as an example"
+  type = any
+  default = {
+    DEVOPS_CONTEXT_GENETICS_CONFIG_EXAMPLE = "undefined"
+  }
+}
