@@ -32,7 +32,6 @@ variable "config_deployment_regions" {
 variable "config_enable_inspection" {
   description = "If 'true', it will deploy additional VMs for infrastructure inspection, default 'false'"
   default = false
-  type = boolean
 }
 
 // Inspection VM config --- //
