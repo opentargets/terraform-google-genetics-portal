@@ -32,4 +32,18 @@ variable "config_deployment_regions" {
 variable "config_enable_inspection" {
   description = "If 'true', it will deploy additional VMs for infrastructure inspection, default 'false'"
   default = false
+  type = boolean
+}
+
+// Inspection VM config --- //
+variable "config_inspection_vm_machine_type" {
+  description = "Machine type to use for inspection VM instances, default 'n1-standard-1'"
+  default = "n1-standard-1"
+  type = string
+}
+
+variable "config_inspection_vm_image" {
+  description = "Disk image to use for booting up the inspection VMs, default 'debian-cloud/debian-10'"
+  default = "debian-cloud/debian-10"
+  type = string
 }
