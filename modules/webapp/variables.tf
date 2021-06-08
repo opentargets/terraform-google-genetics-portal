@@ -36,3 +36,9 @@ variable "webapp_deployment_context" {
     DEVOPS_CONTEXT_GENETICS_CONFIG_EXAMPLE = "undefined"
   }
 }
+// Robots Profile --- //
+variable "webapp_robots_profile" {
+  description = "This defines which 'robots.txt' profile to deploy with the web application, default is 'default', which means no changes will be made to the main 'robots.txt' file set in the web application bundle"
+  type = string
+  default = "default"
+}
