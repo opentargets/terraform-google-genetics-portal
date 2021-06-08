@@ -34,4 +34,8 @@ resource "google_compute_instance" "inspection_vm" {
   }
 
   tags = [ "ssh" ]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
