@@ -9,7 +9,15 @@ config_project_id         = "open-targets-eu-dev"
 config_deployment_regions = ["europe-west1"]
 
 // TODO --- DNS configuration               --- //
+
 // TODO --- Elastic Search configuration    --- //
+config_vm_elastic_search_image_project      = "open-targets-eu-dev"
+config_vm_elastic_search_vcpus              = "4"
+config_vm_elastic_search_mem                = "26624"
+config_vm_elastic_search_image              = "platform-etl-es-21-04-3"
+config_vm_elastic_search_version            = "7.9.0"
+config_vm_elastic_search_boot_disk_size     = "500GB"
+
 // TODO --- Clickhouse configuration        --- //
 // TODO --- API configuration               --- //
 
