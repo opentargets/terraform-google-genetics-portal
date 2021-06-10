@@ -35,97 +35,97 @@ variable "config_deployment_regions" {
 // --- Web Application configuration   --- //
 variable "config_webapp_repo_name" {
   description = "Web Application repository name"
-  type = string
+  type        = string
 }
 
 variable "config_webapp_release" {
   description = "Release version of the web application to deploy"
-  type = string
+  type        = string
 }
 
 variable "config_webapp_deployment_context_map" {
   description = "A map with values for those parameters that need to be customized in the deployment of the web application, see module defaults as an example"
-  type = any
+  type        = any
 }
 
 variable "config_webapp_bucket_location" {
   description = "This input parameter defines the location of the Web Application (bucket), default 'EU'"
-  type = string
-  default = "EU"
+  type        = string
+  default     = "EU"
 }
 
 variable "config_webapp_robots_profile" {
   description = "This input parameter defines the 'robots.txt' profile to be used when deploying the web application, default 'default', which means that no changes to existing 'robots.txt' file will be made"
-  type = string
-  default = "default"
+  type        = string
+  default     = "default"
 }
 
 variable "config_webapp_bucket_name_data_assets" {
   description = "Bucket where to find the data context for the web application"
-  type = string
+  type        = string
 }
 
 variable "config_webapp_data_context_release" {
   description = "Data context release for the web application"
-  type = string
+  type        = string
 }
 
 // Web Application Web Servers --- //
 variable "config_webapp_webserver_docker_image_version" {
   description = "NginX Docker image version to use in deployment"
-  type = string
+  type        = string
 }
 
 variable "config_webapp_webserver_vm_vcpus" {
   description = "CPU count, default '1'"
-  type = number
-  default = "1"
+  type        = number
+  default     = "1"
 }
 
 variable "config_webapp_webserver_vm_mem" {
   description = "Amount of memory allocated Web Server nodes (MiB), default '3840'"
-  type = number
-  default = "3840"
+  type        = number
+  default     = "3840"
 }
 
 variable "config_webapp_webserver_vm_image" {
   description = "VM image to use for Web Server nodes, default 'cos-stable'"
-  type = string
-  default = "cos-stable"
+  type        = string
+  default     = "cos-stable"
 }
 
 variable "config_webapp_webserver_vm_image_project" {
   description = "Project hosting the VM image, default 'cos-cloud'"
-  type = string
-  default = "cos-cloud"
+  type        = string
+  default     = "cos-cloud"
 }
 
 variable "config_webapp_webserver_vm_boot_disk_size" {
   description = "Boot disk size for Web Server nodes, default '10GB'"
-  type = string
-  default = "10GB"
+  type        = string
+  default     = "10GB"
 }
 
 // --- Development / Debugging Support --- //
 variable "config_enable_inspection" {
   description = "If 'true', it will deploy additional VMs for infrastructure inspection, default 'false'"
-  default = false
+  default     = false
 }
 
 variable "config_enable_ssh" {
   description = "if 'true' it will enable SSH traffic to all the deployed VMs, default 'false'"
-  default = false
+  default     = false
 }
 
 // Inspection VM config --- //
 variable "config_inspection_vm_machine_type" {
   description = "Machine type to use for inspection VM instances, default 'n1-standard-1'"
-  default = "n1-standard-1"
-  type = string
+  default     = "n1-standard-1"
+  type        = string
 }
 
 variable "config_inspection_vm_image" {
   description = "Disk image to use for booting up the inspection VMs, default 'debian-cloud/debian-10'"
-  default = "debian-cloud/debian-10"
-  type = string
+  default     = "debian-cloud/debian-10"
+  type        = string
 }

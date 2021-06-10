@@ -39,10 +39,10 @@ locals {
   tag_glb_target_node = "glb-serve-target"
 
   // --- Development / Debugging Support --- //
-  inspection_enabled = var.config_enable_inspection
+  inspection_enabled                = var.config_enable_inspection
   inspection_conditional_deployment = local.inspection_enabled ? 1 : 0
-  dev_ssh_enabled = var.config_enable_ssh
+  dev_ssh_enabled                   = var.config_enable_ssh
   // Dev tags
-  dev_fw_tags = local.dev_ssh_enabled ? [ local.fw_tag_ssh ] : [ ]
+  dev_fw_tags = local.dev_ssh_enabled ? [local.fw_tag_ssh] : []
 }
 

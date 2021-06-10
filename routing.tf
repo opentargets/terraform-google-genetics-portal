@@ -3,7 +3,7 @@ module "cloud_router" {
   source  = "terraform-google-modules/cloud-router/google"
   version = "~> 0.4"
 
-  project = var.config_project_id
+  project    = var.config_project_id
   depends_on = [module.vpc_network]
 
 
