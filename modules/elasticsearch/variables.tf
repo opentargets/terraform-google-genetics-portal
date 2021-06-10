@@ -76,3 +76,8 @@ variable "vm_elastic_search_image" {
   type = string
 }
 
+variable "vm_elastic_search_image_project" {
+  description = "Project hosting the Elastic Search VM Instance image"
+  type = string
+}
+
