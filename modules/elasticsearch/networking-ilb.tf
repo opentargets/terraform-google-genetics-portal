@@ -1,7 +1,12 @@
 // --- Elastic Search Internal Load Balancer definition --- //
-module "ilb-es" {
+module "ilb_es" {
   source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "~> 2.0"
+
+  depends_on = [
+      google_compute_region_instance_group_manager.regmig_elastic_search
+    ]
+
   region       = var.deployment_region
   name         = "${var.module_wide_prefix_scope}-ilb"
   ports        = [ local.elastic_search_port_requests ]
