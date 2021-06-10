@@ -48,7 +48,7 @@ variable "config_webapp_deployment_context_map" {
   type = any
 }
 
-variable "config_webapp_location" {
+variable "config_webapp_bucket_location" {
   description = "This input parameter defines the location of the Web Application (bucket), default 'EU'"
   type = string
   default = "EU"
