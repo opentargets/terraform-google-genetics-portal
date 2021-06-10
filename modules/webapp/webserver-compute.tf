@@ -108,7 +108,7 @@ resource "google_compute_region_instance_group_manager" "regmig_webserver" {
   base_instance_name = "${var.module_wide_prefix_scope}-${count.index}-webserver"
   depends_on = [ 
       google_compute_instance_template.webserver_template,
-      module.firewall_rules,
+      module.firewall_rules[count.index],
       null_resource.webapp_provisioner
     ]
 
