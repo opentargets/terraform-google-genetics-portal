@@ -61,3 +61,13 @@ variable "vm_elastic_search_version" {
   type = string
 }
 
+variable "vm_elastic_search_vcpus" {
+  description = "CPU count for each Elastic Search Node VM"
+  type = number
+}
+
+variable "vm_elastic_search_mem" {
+  description = "Amount of memory assigned to every Elastic Search Instance (MiB)"
+  type = number
+}
+
