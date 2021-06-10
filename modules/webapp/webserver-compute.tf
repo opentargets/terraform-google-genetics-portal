@@ -22,11 +22,14 @@ resource "random_string" "random_web_server_suffix" {
 data "google_compute_zones" "gcp_zones_available" {
   count = length(var.webserver_deployment_regions)
   
+  project = var.project_id
+
   region = var.webserver_deployment_regions[count.index]
 }
 
 // Service Account --- //
 resource "google_service_account" "gcp_service_acc_apis" {
+  project = var.project_id
   account_id = "${var.module_wide_prefix_scope}-svcacc-${random_string.random_web_server_suffix.result}"
   display_name = "${var.module_wide_prefix_scope}-GCP-service-account"
 }
@@ -34,6 +37,8 @@ resource "google_service_account" "gcp_service_acc_apis" {
 // Instance Template --- //
 resource "google_compute_instance_template" "webserver_template" {
   count = length(var.webserver_deployment_regions)
+
+  project = var.project_id
 
   name = "${var.module_wide_prefix_scope}-${count.index}-webserver-template-${random_string.random_web_server_suffix.result}"
   description = "Open Targets Genetics Portal Web Server node template"
@@ -89,6 +94,8 @@ resource "google_compute_instance_template" "webserver_template" {
 // Health Check --- //
 resource "google_compute_health_check" "webserver_healthcheck" {
   name = "${var.module_wide_prefix_scope}-webserver-healthcheck"
+  project = var.project_id
+
   check_interval_sec = 5
   timeout_sec = 5
   healthy_threshold = 2
@@ -102,6 +109,8 @@ resource "google_compute_health_check" "webserver_healthcheck" {
 // RegMIG --- //
 resource "google_compute_region_instance_group_manager" "regmig_webserver" {
   count = length(var.webserver_deployment_regions)
+
+  project = var.project_id
 
   name = "${var.module_wide_prefix_scope}-${count.index}-regmig-webserver"
   region = var.webserver_deployment_regions[count.index]
@@ -142,6 +151,8 @@ resource "google_compute_region_instance_group_manager" "regmig_webserver" {
 // Autoscalers --- //
 resource "google_compute_region_autoscaler" "autoscaler_webserver" {
   count = length(var.webserver_deployment_regions)
+
+  project = var.project_id
 
   name = "${var.module_wide_prefix_scope}-${count.index}-autoscaler"
   region = var.webserver_deployment_regions[count.index]
