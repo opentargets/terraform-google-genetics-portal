@@ -43,3 +43,10 @@ variable "deployment_region" {
   type = string
 }
 
+// --- Elastic Search Instance configuration --- //
+variable "deployment_target_size" {
+  description = "Initial Elastic Search node count to deploy, default is '1'"
+  type = number
+  default = 1
+}
+
