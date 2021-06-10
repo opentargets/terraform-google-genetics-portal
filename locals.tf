@@ -6,6 +6,10 @@ locals {
     local.gcp_available_region_names_sorted,
     [for region_details in data.google_compute_zones.gcp_available_zones : region_details.names]
   )
+  gcp_regions_static_indexing = zipmap(
+    local.gcp_available_region_names_sorted,
+    range(0, length(local.gcp_available_region_names_sorted))
+  )
 
   // Folders --- //
   folder_tmp = abspath("${path.module}/tmp")
@@ -23,10 +27,7 @@ locals {
       }
     ]
   )
-  vpc_subnet_index = zipmap(
-    local.gcp_available_region_names_sorted,
-    range(0, length(local.gcp_available_region_names_sorted))
-  )
+  vpc_subnet_index = local.gcp_regions_static_indexing
 
   // Firewall --- //
   // Target Tags
