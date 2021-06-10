@@ -38,3 +38,8 @@ variable "network_sources_health_checks" {
   ]
 }
 
+variable "deployment_region" {
+  description = "Region where resources should be deployed"
+  type = string
+}
+
