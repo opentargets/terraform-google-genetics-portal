@@ -47,6 +47,7 @@ module "backend_elastic_search" {
   depends_on = [ 
     module.vpc_network 
     ]
+  project_id = var.config_project_id
   module_wide_prefix_scope = "${var.config_release_name}-es-${local.gcp_regions_static_indexing[var.config_deployment_regions[count.index]]}"
   network_name = module.vpc_network.network_name
   network_self_link = module.vpc_network.network_self_link
@@ -63,7 +64,7 @@ module "backend_elastic_search" {
   vm_elastic_search_image_project = var.config_vm_elastic_search_image_project
   vm_elastic_search_boot_disk_size = var.config_vm_elastic_search_boot_disk_size
   // Additional firewall tags if development mode is 'ON'
-  vm_firewall_tags = local.dev_mode_fw_tags
+  vm_firewall_tags = local.dev_fw_tags
   deployment_region = var.config_deployment_regions[count.index]
   deployment_target_size = 1
 }

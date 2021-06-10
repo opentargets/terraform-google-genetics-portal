@@ -95,8 +95,9 @@ resource "google_compute_region_instance_group_manager" "regmig_elastic_search" 
   base_instance_name = "${var.module_wide_prefix_scope}-esearch"
   depends_on = [ 
       google_compute_instance_template.elastic_search_template,
-      google_compute_firewall.vpc_netfw_elasticsearch_requests,
-      google_compute_firewall.vpc_netfw_elasticsearch_comms
+      //google_compute_firewall.vpc_netfw_elasticsearch_requests,
+      //google_compute_firewall.vpc_netfw_elasticsearch_comms
+      module.firewall_rules
     ]
 
   // Instance Template

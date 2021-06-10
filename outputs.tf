@@ -28,6 +28,14 @@ output "inspection_vms" {
   }] : []
 }
 
+// Elastic Search Deployment details --- //
+output "elastic_search_deployments" {
+  value = zipmap(
+    var.config_deployment_regions,
+    module.backend_elastic_search.*
+  )
+}
+
 // Web Application Deployment details --- //
 output "webapp_deployment" {
   value = module.web_app

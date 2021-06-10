@@ -28,7 +28,36 @@ variable "config_deployment_regions" {
 
 // --- Platform Configuration --- //
 // TODO --- DNS configuration               --- //
-// TODO --- Elastic Search configuration    --- //
+// --- Elastic Search configuration    --- //
+variable "config_vm_elastic_search_image_project" {
+  description = "GCP project hosting the Elastic Search Image."
+  type = string
+}
+
+variable "config_vm_elastic_search_vcpus" {
+  description = "CPU count configuration for the deployed Elastic Search Instances"
+  type = number
+}
+
+variable "config_vm_elastic_search_mem" {
+  description = "RAM configuration for the deployed Elastic Search Instances"
+  type = number
+}
+
+variable "config_vm_elastic_search_image" {
+  description = "Disk image to use for the deployed Elastic Search Instances"
+  type = string
+}
+
+variable "config_vm_elastic_search_version" {
+  description = "Elastic search version to deploy"
+  type = string
+}
+
+variable "config_vm_elastic_search_boot_disk_size" {
+  description = "Boot disk size to use for the deployed Elastic Search Instances"
+  type = string
+}
 // TODO --- Clickhouse configuration        --- //
 // TODO --- API configuration               --- //
 
