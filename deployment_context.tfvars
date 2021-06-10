@@ -28,3 +28,4 @@ config_webapp_data_context_release          = "21.04"
 
 // --- Development features                 --- //
 config_enable_inspection = true
+config_enable_ssh = true
