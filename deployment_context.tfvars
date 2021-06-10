@@ -25,6 +25,7 @@ config_webapp_deployment_context_map        = {
 //config_webapp_robots_profile                = "production"
 config_webapp_bucket_name_data_assets       = "open-targets-data-releases"
 config_webapp_data_context_release          = "21.04"
+config_webapp_webserver_docker_image_version= "1.20"
 
 // --- Development features                 --- //
 config_enable_inspection = true
