@@ -56,3 +56,8 @@ variable "vm_firewall_tags" {
   default = [ ]
 }
 
+variable "vm_elastic_search_version" {
+  description = "Elastic Search Docker Image version to use"
+  type = string
+}
+
