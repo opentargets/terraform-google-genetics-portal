@@ -133,7 +133,7 @@ resource "google_compute_region_instance_group_manager" "regmig_webserver" {
     type                         = "PROACTIVE"
     instance_redistribution_type = "PROACTIVE"
     minimal_action               = "REPLACE"
-    max_surge_fixed              = length(data.google_compute_zones.available[count.index].names)
+    max_surge_fixed              = length(data.google_compute_zones.gcp_zones_available[count.index].names)
     max_unavailable_fixed        = 0
     min_ready_sec                = 30
   }
@@ -148,7 +148,7 @@ resource "google_compute_region_autoscaler" "autoscaler_webserver" {
   target = google_compute_region_instance_group_manager.regmig_webserver[count.index].id
 
   autoscaling_policy {
-    max_replicas = length(data.google_compute_zones.available[count.index].names) * 2
+    max_replicas = length(data.google_compute_zones.gcp_zones_available[count.index].names) * 2
     min_replicas = 1
     cooldown_period = 60
     load_balancing_utilization {
