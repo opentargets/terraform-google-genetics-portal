@@ -7,6 +7,9 @@ locals {
     [for region_details in data.google_compute_zones.gcp_available_zones : region_details.names]
   )
 
+  // Folders --- //
+  folder_tmp = abspath("${path.module}/tmp")
+
   // Networking --- // 
   vpc_network_name             = "${var.config_release_name}-vpc"
   vpc_network_main_subnet_name = "main-subnet"
@@ -30,6 +33,10 @@ locals {
   fw_tag_ssh   = "ssh"
   fw_tag_http  = "http"
   fw_tag_https = "https"
+
+  // Global Load Balancer --- //
+  // GLB tagging for traffic destination --- //
+  tag_glb_target_node = "glb-serve-target"
 
   // --- Development / Debugging Support --- //
   inspection_enabled = var.config_enable_inspection

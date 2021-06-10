@@ -73,7 +73,7 @@ module "web_app" {
   )
    //network_sources_health_checks = DEFAULT
    webserver_deployment_regions = var.config_deployment_regions
-   webserver_firewall_tags = concat([ local.tag_glb_target_node ], local.dev_mode_fw_tags)
+   webserver_firewall_tags = concat([ local.tag_glb_target_node ], local.dev_fw_tags)
    webserver_docker_image_version = var.config_webapp_webserver_docker_image_version
    webserver_vm_vcpus = var.config_webapp_webserver_vm_vcpus
    webserver_vm_mem = var.config_webapp_webserver_vm_mem
