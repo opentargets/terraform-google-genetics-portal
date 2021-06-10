@@ -49,7 +49,9 @@ data "google_compute_zones" "gcp_available_zones" {
 module "web_app" {
   source     = "./modules/webapp"
   project_id = var.config_project_id
-  // depends_on = [ ]
+  depends_on = [
+    module.vpc_network
+  ]
   module_wide_prefix_scope           = "${var.config_release_name}-web"
   folder_tmp                         = local.folder_tmp
   webapp_bucket_location             = var.config_webapp_bucket_location

@@ -27,3 +27,8 @@ output "inspection_vms" {
     }]
   }] : []
 }
+
+// Web Application Deployment details --- //
+output "webapp_deployment" {
+  value = module.web_app
+}
