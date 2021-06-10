@@ -12,6 +12,19 @@ config_deployment_regions = ["europe-west1"]
 // TODO --- Elastic Search configuration    --- //
 // TODO --- Clickhouse configuration        --- //
 // TODO --- API configuration               --- //
-// TODO --- Web Application configuration   --- //
+
+// --- Web Application configuration   --- //
+// [XXX WARNING - DEV - USING PLATFORM APP FOR TESTING PROVISIONER" XXX] //
+config_webapp_repo_name                     = "opentargets/platform-app"
+config_webapp_release                       = "21.04.2"
+config_webapp_deployment_context_map        = {
+    DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_URL_API = "'https://api.platform.opentargets.org/api/v4/graphql'"
+    DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_URL_API_BETA = "'https://api.platform.opentargets.org/api/v4/graphql'"
+}
+// Use 'default' robots.txt profile
+//config_webapp_robots_profile                = "production"
+config_webapp_bucket_name_data_assets       = "open-targets-data-releases"
+config_webapp_data_context_release          = "21.04"
+
 // --- Development features                 --- //
 config_enable_inspection = true
