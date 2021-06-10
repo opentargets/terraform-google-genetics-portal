@@ -112,6 +112,11 @@ variable "config_enable_inspection" {
   default = false
 }
 
+variable "config_enable_ssh" {
+  description = "if 'true' it will enable SSH traffic to all the deployed VMs, default 'false'"
+  default = false
+}
+
 // Inspection VM config --- //
 variable "config_inspection_vm_machine_type" {
   description = "Machine type to use for inspection VM instances, default 'n1-standard-1'"
