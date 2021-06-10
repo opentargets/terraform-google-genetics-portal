@@ -154,7 +154,7 @@ resource "google_compute_region_autoscaler" "autoscaler_webserver" {
 
   project = var.project_id
 
-  name = "${var.module_wide_prefix_scope}-${count.index}-autoscaler"
+  name = "${var.module_wide_prefix_scope}-${local.gcp_regions_static_indexing[var.webserver_deployment_regions[count.index]]}-autoscaler"
   region = var.webserver_deployment_regions[count.index]
   target = google_compute_region_instance_group_manager.regmig_webserver[count.index].id
 

@@ -52,6 +52,7 @@ module "web_app" {
   depends_on = [
     module.vpc_network
   ]
+  gcp_available_region_names = local.gcp_available_region_names_sorted
   module_wide_prefix_scope           = "${var.config_release_name}-web"
   folder_tmp                         = local.folder_tmp
   webapp_bucket_location             = var.config_webapp_bucket_location

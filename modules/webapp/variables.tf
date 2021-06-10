@@ -1,4 +1,11 @@
 // --- Web Application Module Input Parameters --- //
+// Underlying GCP Infrastructure Details --- //
+variable "gcp_available_region_names" {
+  // I have to do this due to a weird dependency in Terraform's computed graph
+  description = "List of GCP Available Regions for use by the module"
+  type = list(string) 
+}
+
 // General Deployment Information --- //
 variable "module_wide_prefix_scope" {
   description = "Scoping prefix for naming resources in this deployment, default 'mbdevgenwebapp'"
