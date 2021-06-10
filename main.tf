@@ -40,7 +40,33 @@ data "google_compute_zones" "gcp_available_zones" {
 
 // [--- Components ---] //
 // --- Elastic Search --- //
-// TODO
+module "backend_elastic_search" {
+  source = "./modules/elasticsearch"
+  count = length(var.config_deployment_regions)
+
+  depends_on = [ 
+    module.vpc_network 
+    ]
+  module_wide_prefix_scope = "${var.config_release_name}-es-${local.gcp_regions_static_indexing[var.config_deployment_regions[count.index]]}"
+  network_name = module.vpc_network.network_name
+  network_self_link = module.vpc_network.network_self_link
+  network_subnet_name = local.vpc_network_main_subnet_name
+  network_source_ranges = [
+    local.vpc_network_region_subnet_map[var.config_deployment_regions[count.index]].subnet_ip
+  ]
+  // Elastic Search configuration
+  vm_elastic_search_version = var.config_vm_elastic_search_version
+  vm_elastic_search_vcpus = var.config_vm_elastic_search_vcpus
+  // Memory size in MiB
+  vm_elastic_search_mem = var.config_vm_elastic_search_mem
+  vm_elastic_search_image = var.config_vm_elastic_search_image
+  vm_elastic_search_image_project = var.config_vm_elastic_search_image_project
+  vm_elastic_search_boot_disk_size = var.config_vm_elastic_search_boot_disk_size
+  // Additional firewall tags if development mode is 'ON'
+  vm_firewall_tags = local.dev_mode_fw_tags
+  deployment_region = var.config_deployment_regions[count.index]
+  deployment_target_size = 1
+}
 // --- Clickhouse --- //
 // TODO
 // --- API --- //
