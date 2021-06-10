@@ -71,3 +71,8 @@ variable "vm_elastic_search_mem" {
   type = number
 }
 
+variable "vm_elastic_search_image" {
+  description = "VM Image to use for Elastic Search instances"
+  type = string
+}
+
