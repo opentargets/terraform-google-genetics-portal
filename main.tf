@@ -52,7 +52,7 @@ module "web_app" {
    // depends_on = [ ]
    module_wide_prefix_scope = "${var.config_release_name}-web"
    folder_tmp = local.folder_tmp
-   location = var.config_webapp_location
+   webapp_bucket_location = var.config_webapp_location
    webapp_repo_name = var.config_webapp_repo_name
    webapp_release = var.config_webapp_release
    webapp_deployment_context = var.config_webapp_deployment_context_map
