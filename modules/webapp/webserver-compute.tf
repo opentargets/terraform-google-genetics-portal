@@ -18,3 +18,10 @@ resource "random_string" "random_web_server_suffix" {
   }
 }
 
+// Access to Available compute zones in the given region --- //
+data "google_compute_zones" "gcp_zones_available" {
+  count = length(var.webserver_deployment_regions)
+  
+  region = var.webserver_deployment_regions[count.index]
+}
+
