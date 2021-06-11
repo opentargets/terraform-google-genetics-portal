@@ -1,5 +1,5 @@
 // --- Clickhouse Internal Load Balancer definition --- //
-module "ilb_es" {
+module "ilb_ch" {
   source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "~> 2.0"
 
