@@ -6,6 +6,11 @@ variable "module_wide_prefix_scope" {
   default = "mbdevgenesch"
 }
 
+variable "project_id" {
+  description = "Project ID where resources will be deployed"
+  type = string
+}
+
 variable "network_name" {
   description = "Name of the network resources will be connected to, default 'default'"
   type = string
