@@ -1,4 +1,4 @@
-// --- Open Targets Genetics Portal, deployment module --- //
+// --- Open Targets Genetics Portal, Elastic Search deployment module --- //
 // Author: Manuel Bernal Llinares <mbdebian@gmail.com>
 /*
     This module defines a Regional Elasctic Search deployment behind a ILB,
