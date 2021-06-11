@@ -16,3 +16,10 @@ resource "random_string" "random_ch_vm" {
   }
 }
 
+// Service Account --- //
+resource "google_service_account" "gcp_service_acc_apis" {
+    project = var.project_id
+  account_id = "${var.module_wide_prefix_scope}-svc-${random_string.random_ch_vm.result}"
+  display_name = "${var.module_wide_prefix_scope}-GCP-service-account"
+}
+
