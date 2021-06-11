@@ -121,7 +121,7 @@ resource "google_compute_region_instance_group_manager" "regmig_clickhouse" {
     type                         = "PROACTIVE"
     instance_redistribution_type = "PROACTIVE"
     minimal_action               = "REPLACE"
-    max_surge_fixed              = length(data.google_compute_zones.available.names)
+    max_surge_fixed              = local.compute_zones_n_total
     max_unavailable_fixed        = 0
     min_ready_sec                = 30
   }

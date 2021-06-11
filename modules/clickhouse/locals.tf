@@ -14,5 +14,5 @@ locals {
     clickhouse_template_source_image = "${var.vm_clickhouse_image_project}/${var.vm_clickhouse_image}"
 
     // Compute Zones internal parameters
-    compute_zones_n_total = length(data.google_compute_zones.available.names)
+    compute_zones_n_total = length(data.google_compute_zones.gcp_available_zones.names)
 }
