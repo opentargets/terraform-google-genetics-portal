@@ -36,6 +36,15 @@ output "elastic_search_deployments" {
   )
 }
 
+// Clickhouse deployment details --- //
+output "clickhouse_deployments" {
+  value = zipmap(
+    var.config_deployment_regions,
+    module.backend_clickhouse.*
+  )
+}
+
+
 // Web Application Deployment details --- //
 output "webapp_deployment" {
   value = module.web_app
