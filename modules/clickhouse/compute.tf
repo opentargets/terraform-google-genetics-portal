@@ -70,7 +70,7 @@ resource "google_compute_instance_template" "clickhouse_template" {
   }
 }
 
-// --- Health Check definition --- //
+// Health Check definition --- //
 resource "google_compute_health_check" "clickhouse_healthcheck" {
     project = var.project_id
   name = "${var.module_wide_prefix_scope}-clickhouse-healthcheck"
@@ -84,7 +84,7 @@ resource "google_compute_health_check" "clickhouse_healthcheck" {
   }
 }
 
-// --- Regional Instance Group Manager --- //
+// Regional Instance Group Manager --- //
 resource "google_compute_region_instance_group_manager" "regmig_clickhouse" {
     project = var.project_id
   name = "${var.module_wide_prefix_scope}-regmig-clickhouse"
@@ -127,3 +127,19 @@ resource "google_compute_region_instance_group_manager" "regmig_clickhouse" {
   }
 }
 
+// Autoscaler --- //
+resource "google_compute_region_autoscaler" "autoscaler_clickhouse" {
+    project = var.project_id
+  name = "${var.module_wide_prefix_scope}-autoscaler"
+  region = var.deployment_region
+  target = google_compute_region_instance_group_manager.regmig_clickhouse.id
+
+  autoscaling_policy {
+    max_replicas = local.compute_zones_n_total * 2
+    min_replicas = 1
+    cooldown_period = 60
+    cpu_utilization {
+      target = 0.75
+    }
+  }
+}
