@@ -11,10 +11,10 @@ output "network_subnet_name" {
   value = var.network_subnet_name
 }
 
-/*output "ilb_ip_address" {
-  value = google_compute_forwarding_rule.ilb_forwarding_rule.ip_address
+output "ilb_ip_address" {
+  //value = google_compute_forwarding_rule.ilb_forwarding_rule.ip_address
+  value = module.ilb_es.ip_address
 }
-*/
 
 // Named ports --- //
 output "port_elastic_search_requests" {

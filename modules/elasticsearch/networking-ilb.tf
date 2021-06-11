@@ -7,11 +7,15 @@ module "ilb_es" {
       google_compute_region_instance_group_manager.regmig_elastic_search
     ]
 
+  project = var.project_id
   region       = var.deployment_region
   name         = "${var.module_wide_prefix_scope}-ilb"
   ports        = [ local.elastic_search_port_requests ]
   source_tags  = []
   target_tags  = [local.fw_tag_elasticsearch_requests]
+  create_backend_firewall = false
+  network = var.network_name
+  subnetwork = var.network_subnet_name
   health_check = {
     type                = "tcp"
     check_interval_sec  = 1
