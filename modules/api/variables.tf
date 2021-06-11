@@ -1,4 +1,11 @@
 // --- Module Input Parameters --- //
+// Underlying GCP Infrastructure Details --- //
+variable "gcp_available_region_names" {
+  // I have to do this due to a weird dependency in Terraform's computed graph
+  description = "List of GCP Available Regions for use by the module"
+  type = list(string) 
+}
+
 // General deployment input parameters --- //
 variable "module_wide_prefix_scope" {
   description = "Scoping prefix for resources names deployed by this module, default 'mbdevgenapi'"
