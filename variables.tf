@@ -58,7 +58,32 @@ variable "config_vm_elastic_search_boot_disk_size" {
   description = "Boot disk size to use for the deployed Elastic Search Instances"
   type        = string
 }
-// TODO --- Clickhouse configuration        --- //
+// --- Clickhouse configuration        --- //
+variable "config_vm_clickhouse_vcpus" {
+  description = "CPU count for Clickhouse instances"
+  type = number
+}
+
+variable "config_vm_clickhouse_mem" {
+  description = "Amount of memory allocated for Clickhouse instances"
+  type = number
+}
+
+variable "config_vm_clickhouse_image" {
+  description = "Image to use for launching Clickhouse instances"
+  type = string
+}
+
+variable "config_vm_clickhouse_image_project" {
+  description = "Project where to find the instance image to use"
+  type = string
+}
+
+variable "config_vm_clickhouse_boot_disk_size" {
+  description = "Boot disk size to be used in Clickhouse instances"
+  type = string
+}
+
 // TODO --- API configuration               --- //
 
 // --- Web Application configuration   --- //
