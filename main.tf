@@ -69,7 +69,31 @@ module "backend_elastic_search" {
   deployment_target_size = 1
 }
 // --- Clickhouse --- //
-// TODO
+// --- Clickhouse Backend --- //
+module "backend_clickhouse" {
+  source = "./modules/clickhouse"
+  count = length(var.config_deployment_regions)
+
+  depends_on = [ module.vpc_network ]
+  module_wide_prefix_scope = "${var.config_release_name}-ch-${local.gcp_regions_static_indexing[var.config_deployment_regions[count.index]]}"
+  project_id = var.config_project_id
+  network_name = module.vpc_network.network_name
+  network_self_link = module.vpc_network.network_self_link
+  network_subnet_name = local.vpc_network_main_subnet_name
+  network_source_ranges = [ 
+    local.vpc_network_region_subnet_map[var.config_deployment_regions[count.index]].subnet_ip
+  ]
+  vm_clickhouse_vcpus = var.config_vm_clickhouse_vcpus
+  vm_clickhouse_mem = var.config_vm_clickhouse_mem
+  vm_clickhouse_image = var.config_vm_clickhouse_image
+  vm_clickhouse_image_project = var.config_vm_clickhouse_image_project
+  vm_clickhouse_boot_disk_size = var.config_vm_clickhouse_boot_disk_size
+  // Additional firewall tags if development mode is 'ON'
+  vm_firewall_tags = local.dev_fw_tags
+  deployment_region = var.config_deployment_regions[count.index]
+  deployment_target_size = 1
+}
+
 // --- API --- //
 // TODO
 // --- Web Application --- //
