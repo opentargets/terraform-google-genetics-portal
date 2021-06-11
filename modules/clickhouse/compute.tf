@@ -84,3 +84,46 @@ resource "google_compute_health_check" "clickhouse_healthcheck" {
   }
 }
 
+// --- Regional Instance Group Manager --- //
+resource "google_compute_region_instance_group_manager" "regmig_clickhouse" {
+    project = var.project_id
+  name = "${var.module_wide_prefix_scope}-regmig-clickhouse"
+  region = var.deployment_region
+  base_instance_name = "${var.module_wide_prefix_scope}-clickhouse"
+  depends_on = [ 
+      google_compute_instance_template.clickhouse_template,
+      module.firewall_rules
+    ]
+
+  // Instance Template
+  version {
+    instance_template = google_compute_instance_template.clickhouse_template.id
+  }
+
+  target_size = var.deployment_target_size
+
+  named_port {
+    name = local.clickhouse_http_req_port_name
+    port = local.clickhouse_http_req_port
+  }
+
+  named_port {
+    name = local.clickhouse_cli_req_port_name
+    port = local.clickhouse_cli_req_port
+  }
+
+  auto_healing_policies {
+    health_check = google_compute_health_check.clickhouse_healthcheck.id
+    initial_delay_sec = 300
+  }
+
+  update_policy {
+    type                         = "PROACTIVE"
+    instance_redistribution_type = "PROACTIVE"
+    minimal_action               = "REPLACE"
+    max_surge_fixed              = length(data.google_compute_zones.available.names)
+    max_unavailable_fixed        = 0
+    min_ready_sec                = 30
+  }
+}
+
