@@ -70,3 +70,17 @@ resource "google_compute_instance_template" "clickhouse_template" {
   }
 }
 
+// --- Health Check definition --- //
+resource "google_compute_health_check" "clickhouse_healthcheck" {
+    project = var.project_id
+  name = "${var.module_wide_prefix_scope}-clickhouse-healthcheck"
+  check_interval_sec = 5
+  timeout_sec = 5
+  healthy_threshold = 2
+  unhealthy_threshold = 10
+
+  tcp_health_check {
+    port = local.clickhouse_http_req_port
+  }
+}
+
