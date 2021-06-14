@@ -67,7 +67,7 @@ variable "vm_firewall_tags" {
   default = [ ]
 }
 
-variable "vm_platform_api_image_version" {
+variable "vm_api_image_version" {
   description = "API Docker image version to use in deployment"
   type = string
 }

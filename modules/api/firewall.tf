@@ -2,6 +2,7 @@
 module "firewall_rules" {
   source = "terraform-google-modules/network/google//modules/firewall-rules"
 
+count = length(var.deployment_regions)
   project_id   = var.project_id
   network_name = var.network_name
 
@@ -9,10 +10,10 @@ module "firewall_rules" {
   rules = [
     // Traffic to the API nodes --- //
     {
-      name        = "${var.network_name}-${var.deployment_region}-allow-api-requests"
+      name        = "${var.network_name}-${var.deployment_regions[count.index]}-allow-api-requests"
       description = "Allow API INBOUND traffic"
       direction   = "INGRESS"
-      ranges      = var.network_source_ranges
+      ranges      = [ var.network_source_ranges_map[var.deployment_regions[count.index]].source_range ]
       target_tags = [ local.fw_tag_api_node ]
       allow = [{
         protocol = "tcp"
@@ -27,10 +28,10 @@ module "firewall_rules" {
     },
     // Health Checks - //
     {
-      name        = "${var.network_name}-${var.deployment_region}-allow-api-healthchecks"
+      name        = "${var.network_name}-${var.deployment_regions[count.index]}-allow-api-healthchecks"
       description = "Firewall rule for allowing Health Checks traffic to API Nodes"
       direction   = "INGRESS"
-      ranges      = concat(var.network_source_ranges, var.network_sources_health_checks)
+      ranges      = concat([ var.network_source_ranges_map[var.deployment_regions[count.index]].source_range ], var.network_sources_health_checks)
       target_tags = [ local.fw_tag_api_node ]
       allow = [{
         protocol = "tcp"

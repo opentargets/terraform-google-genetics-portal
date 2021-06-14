@@ -6,7 +6,7 @@ module "ilb_api" {
   version      = "~> 2.0"
 
   depends_on = [
-      google_compute_region_instance_group_manager.regmig_clickhouse
+      google_compute_region_instance_group_manager.regmig_api[count.index]
     ]
 
   project = var.project_id

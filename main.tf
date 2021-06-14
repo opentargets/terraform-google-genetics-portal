@@ -103,6 +103,7 @@ module "backend_api" {
     module.backend_elastic_search,
     module.backend_clickhouse
   ]
+  gcp_available_region_names         = local.gcp_available_region_names_sorted
   module_wide_prefix_scope = "${var.config_release_name}-api"
   network_name = module.vpc_network.network_name
   network_self_link = module.vpc_network.network_self_link
@@ -116,9 +117,9 @@ module "backend_api" {
     ]
   )
   // We are using a root module defined GLB, so we need this tag to be appended to api nodes, for them to be visible to the GLB. Include development mode firewall tags
-  vm_firewall_tags = concat([ local.tag_glb_target_node ], local.dev_mode_fw_tags)
+  vm_firewall_tags = concat([ local.tag_glb_target_node ], local.dev_fw_tags)
   // API VMs configuration
-  vm_api_image_version = var.config_vm_platform_api_image_version
+  vm_api_image_version = var.config_vm_api_image_version
   vm_api_vcpus = var.config_vm_api_vcpus
   vm_api_mem = var.config_vm_api_mem
   vm_api_image = var.config_vm_api_image

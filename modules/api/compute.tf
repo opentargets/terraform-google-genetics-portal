@@ -10,7 +10,7 @@ resource "random_string" "random_source_api" {
     otpapi_template_tags = join("", sort(local.api_template_tags)),
     otpapi_template_machine_type = local.api_template_machine_type,
     otpapi_template_source_image = local.api_template_source_image,
-    vm_platform_api_image_version = var.vm_platform_api_image_version
+    vm_api_image_version = var.vm_api_image_version
   }
 }
 
@@ -33,8 +33,8 @@ resource "google_compute_instance_template" "api_vm_template" {
 
 project = var.project_id
   name = "${var.module_wide_prefix_scope}-api-template-${md5(var.deployment_regions[count.index])}-${random_string.random_source_api.result}"
-  description = "Open Targets Genetics Portal API node template, API docker image version ${var.vm_platform_api_image_version}"
-  instance_description = "Open Targets Genetics Portal API node, API docker image version ${var.vm_platform_api_image_version}"
+  description = "Open Targets Genetics Portal API node template, API docker image version ${var.vm_api_image_version}"
+  instance_description = "Open Targets Genetics Portal API node, API docker image version ${var.vm_api_image_version}"
   region = var.deployment_regions[count.index]
   
   
@@ -71,7 +71,7 @@ project = var.project_id
       {
         SLICK_CLICKHOUSE_URL = "jdbc:clickhouse://${var.backend_connection_map[var.deployment_regions[count.index]].host_clickhouse}:8123",
         ELASTICSEARCH_HOST = var.backend_connection_map[var.deployment_regions[count.index]].host_elastic_search,
-        PLATFORM_API_VERSION = var.vm_platform_api_image_version,
+        PLATFORM_API_VERSION = var.vm_api_image_version,
         OTP_API_PORT = local.api_port
       }
     )
@@ -107,8 +107,8 @@ project = var.project_id
   region = var.deployment_regions[count.index]
   base_instance_name = "${var.module_wide_prefix_scope}-${count.index}-api"
   depends_on = [ 
-      google_compute_instance_template.otpapi_template,
-      google_compute_firewall.vpc_netfw_otpapi_node
+      google_compute_instance_template.api_template,
+      module.firewall_rules
     ]
 
   // Instance Template
@@ -132,7 +132,7 @@ project = var.project_id
     type                         = "PROACTIVE"
     instance_redistribution_type = "PROACTIVE"
     minimal_action               = "REPLACE"
-    max_surge_fixed              = length(data.google_compute_zones.available[count.index].names)
+    max_surge_fixed              = length(data.google_compute_zones.gcp_zones_availability[count.index].names)
     max_unavailable_fixed        = 0
     min_ready_sec                = 30
   }
@@ -148,7 +148,7 @@ project = var.project_id
   target = google_compute_region_instance_group_manager.regmig_api[count.index].id
 
   autoscaling_policy {
-    max_replicas = length(data.google_compute_zones.available[count.index].names) * 2
+    max_replicas = length(data.google_compute_zones.gcp_zones_availability[count.index].names) * 2
     min_replicas = 1
     cooldown_period = 60
     load_balancing_utilization {
