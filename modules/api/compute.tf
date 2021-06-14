@@ -139,11 +139,11 @@ project = var.project_id
 }
 
 // --- AUTOSCALERS --- //
-resource "google_compute_region_autoscaler" "autoscaler_otpapi" {
+resource "google_compute_region_autoscaler" "autoscaler_api" {
   count = length(var.deployment_regions)
 
 project = var.project_id
-  name = "${var.module_wide_prefix_scope}-${count.index}-autoscaler"
+  name = "${var.module_wide_prefix_scope}-autoscaler-${md5(var.deployment_regions[count.index])}"
   region = var.deployment_regions[count.index]
   target = google_compute_region_instance_group_manager.regmig_api[count.index].id
 
