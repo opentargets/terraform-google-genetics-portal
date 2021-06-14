@@ -18,10 +18,12 @@ resource "random_string" "random_source_api" {
 data "google_compute_zones" "gcp_zones_availability" {
   count = length(var.deployment_regions)
   
+  project = var.project_id
   region = var.deployment_regions[count.index]
 }
 
 resource "google_service_account" "gcp_service_acc_apis" {
+    project = var.project_id
   account_id = "${var.module_wide_prefix_scope}-svcacc-${random_string.random_source_api.result}"
   display_name = "${var.module_wide_prefix_scope}-GCP-service-account"
 }
@@ -29,6 +31,7 @@ resource "google_service_account" "gcp_service_acc_apis" {
 resource "google_compute_instance_template" "api_vm_template" {
   count = length(var.deployment_regions)
 
+project = var.project_id
   name = "${var.module_wide_prefix_scope}-api-template-${md5(var.deployment_regions[count.index])}-${random_string.random_source_api.result}"
   description = "Open Targets Genetics Portal API node template, API docker image version ${var.vm_platform_api_image_version}"
   instance_description = "Open Targets Genetics Portal API node, API docker image version ${var.vm_platform_api_image_version}"
@@ -83,6 +86,7 @@ resource "google_compute_instance_template" "api_vm_template" {
 
 // --- Health Check definition --- //
 resource "google_compute_health_check" "api_healthcheck" {
+    project = var.project_id
   name = "${var.module_wide_prefix_scope}-api-healthcheck"
   check_interval_sec = 5
   timeout_sec = 5
@@ -98,6 +102,7 @@ resource "google_compute_health_check" "api_healthcheck" {
 resource "google_compute_region_instance_group_manager" "regmig_api" {
   count = length(var.deployment_regions)
 
+project = var.project_id
   name = "${var.module_wide_prefix_scope}-regmig-api-${md5(var.deployment_regions[count.index])}"
   region = var.deployment_regions[count.index]
   base_instance_name = "${var.module_wide_prefix_scope}-${count.index}-api"
@@ -137,6 +142,7 @@ resource "google_compute_region_instance_group_manager" "regmig_api" {
 resource "google_compute_region_autoscaler" "autoscaler_otpapi" {
   count = length(var.deployment_regions)
 
+project = var.project_id
   name = "${var.module_wide_prefix_scope}-${count.index}-autoscaler"
   region = var.deployment_regions[count.index]
   target = google_compute_region_instance_group_manager.regmig_api[count.index].id
