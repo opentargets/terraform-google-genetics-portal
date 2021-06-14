@@ -32,7 +32,7 @@ resource "google_compute_instance_template" "api_vm_template" {
   count = length(var.deployment_regions)
 
 project = var.project_id
-  name = "${var.module_wide_prefix_scope}-api-template-${md5(var.deployment_regions[count.index])}-${random_string.random_source_api.result}"
+  name = "${var.module_wide_prefix_scope}-api-template-${substr(md5(var.deployment_regions[count.index]), -18, -1)}-${random_string.random_source_api.result}"
   description = "Open Targets Genetics Portal API node template, API docker image version ${var.vm_api_image_version}"
   instance_description = "Open Targets Genetics Portal API node, API docker image version ${var.vm_api_image_version}"
   region = var.deployment_regions[count.index]
@@ -103,7 +103,7 @@ resource "google_compute_region_instance_group_manager" "regmig_api" {
   count = length(var.deployment_regions)
 
 project = var.project_id
-  name = "${var.module_wide_prefix_scope}-regmig-api-${md5(var.deployment_regions[count.index])}"
+  name = "${var.module_wide_prefix_scope}-regmig-api-${substr(md5(var.deployment_regions[count.index]), -18, -1)}"
   region = var.deployment_regions[count.index]
   base_instance_name = "${var.module_wide_prefix_scope}-${count.index}-api"
   depends_on = [ 
@@ -143,7 +143,7 @@ resource "google_compute_region_autoscaler" "autoscaler_api" {
   count = length(var.deployment_regions)
 
 project = var.project_id
-  name = "${var.module_wide_prefix_scope}-autoscaler-${md5(var.deployment_regions[count.index])}"
+  name = "${var.module_wide_prefix_scope}-autoscaler-${substr(md5(var.deployment_regions[count.index]), -18, -1)}"
   region = var.deployment_regions[count.index]
   target = google_compute_region_instance_group_manager.regmig_api[count.index].id
 
