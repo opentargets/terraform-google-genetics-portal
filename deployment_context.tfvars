@@ -25,7 +25,13 @@ config_vm_clickhouse_image                  = "platform-etl-ch-21-04-3"
 config_vm_clickhouse_image_project          = "open-targets-eu-dev"
 config_vm_clickhouse_boot_disk_size         = "250GB"
 
-// TODO --- API configuration               --- //
+// --- API configuration               --- //
+config_vm_api_image_version        = "21.04.5"
+config_vm_api_vcpus                         = "2"
+config_vm_api_mem                           = "7680"
+config_vm_api_image                         = "cos-stable"
+config_vm_api_image_project                 = "cos-cloud"
+config_vm_api_boot_disk_size                = "10GB"
 
 // --- Web Application configuration   --- //
 // [XXX WARNING - DEV - USING PLATFORM APP FOR TESTING PROVISIONER" XXX] //
