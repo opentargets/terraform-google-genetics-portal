@@ -107,7 +107,7 @@ project = var.project_id
   region = var.deployment_regions[count.index]
   base_instance_name = "${var.module_wide_prefix_scope}-${count.index}-api"
   depends_on = [ 
-      google_compute_instance_template.api_template,
+      google_compute_instance_template.api_vm_template,
       module.firewall_rules
     ]
 

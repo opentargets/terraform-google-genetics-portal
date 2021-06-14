@@ -6,7 +6,7 @@ module "ilb_api" {
   version      = "~> 2.0"
 
   depends_on = [
-      google_compute_region_instance_group_manager.regmig_api[count.index]
+      google_compute_region_instance_group_manager.regmig_api
     ]
 
   project = var.project_id
@@ -37,7 +37,7 @@ module "ilb_api" {
   }
   backends     = [
     {
-        group = google_compute_region_instance_group_manager.regmig_api.instance_group,
+        group = google_compute_region_instance_group_manager.regmig_api[count.index].instance_group,
         description = "API regional instance group for '${var.deployment_regions[count.index]}'"
         },
   ]
