@@ -32,7 +32,7 @@ output "inspection_vms" {
 output "elastic_search_deployments" {
   value = zipmap(
     var.config_deployment_regions,
-    module.backend_elastic_search.*
+    module.backend_elastic_search
   )
 }
 
@@ -40,10 +40,14 @@ output "elastic_search_deployments" {
 output "clickhouse_deployments" {
   value = zipmap(
     var.config_deployment_regions,
-    module.backend_clickhouse.*
+    module.backend_clickhouse
   )
 }
 
+// API deployment details --- //
+output "api_deployments" {
+  value = module.backend_api
+}
 
 // Web Application Deployment details --- //
 output "webapp_deployment" {
