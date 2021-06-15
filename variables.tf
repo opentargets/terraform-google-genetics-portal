@@ -27,7 +27,40 @@ variable "config_deployment_regions" {
 }
 
 // --- Platform Configuration --- //
-// TODO --- DNS configuration               --- //
+// --- DNS configuration               --- //
+// --- DNS Configuration --- //
+variable "config_dns_project_id" {
+  description = "Project ID to use when making changes to Cloud DNS service"
+  type = string
+}
+
+variable "config_dns_managed_zone_name" {
+  description = "Name of the Cloud DNS managed zone to use for DNS changes"
+  type = string
+}
+
+variable "config_dns_managed_zone_dns_name" {
+  description = "Domain name that is being managed in the given managed DNS zone, a.k.a. Cloud DNS -> Managed Zone -> DNS Name"
+  type = string
+}
+
+variable "config_dns_subdomain_prefix" {
+  description = "DNS subdomain prefix to use for anything this deployment definition adds to the DNS information"
+  default = null
+}
+
+variable "config_dns_api_subdomain" {
+  description = "Subdomain for API DNS entry, default 'api'"
+  type = string
+  default = "api"
+}
+
+variable "config_dns_base_subdomain" {
+  description = "Subdomain for Open Targets Genetics Portal Web App, default 'genetics'"
+  type = string
+  default = "genetics"
+}
+
 // --- Elastic Search configuration    --- //
 variable "config_vm_elastic_search_image_project" {
   description = "GCP project hosting the Elastic Search Image."
