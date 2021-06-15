@@ -24,6 +24,16 @@ locals {
     local.dns_platform_base_name
   ]
 
+    // --- Global Load Balancer --- //
+  // GLB tagging for traffic destination --- //
+  tag_glb_target_node = "glb-serve-target"
+  glb_dns_api_dns_names = [ trimsuffix(local.dns_api_dns_name, ".") ]
+  glb_dns_webapp_domain_names = [ for hostname in local.dns_webapp_domain_names: trimsuffix(hostname, ".") ]
+  
+  // SSL --- //
+  ssl_managed_certificate_domain_names = concat(local.dns_webapp_domain_names, [ local.dns_api_dns_name ])
+
+
   // Networking --- // 
   vpc_network_name             = "${var.config_release_name}-vpc"
   vpc_network_main_subnet_name = "main-subnet"
