@@ -68,7 +68,7 @@ module "backend_elastic_search" {
   deployment_region      = var.config_deployment_regions[count.index]
   deployment_target_size = 1
 }
-// --- Clickhouse --- //
+
 // --- Clickhouse Backend --- //
 module "backend_clickhouse" {
   source = "./modules/clickhouse"
