@@ -11,7 +11,7 @@ module "ilb_api" {
 
   project = var.project_id
   region       = var.deployment_regions[count.index]
-  name         = "${var.module_wide_prefix_scope}-ilb-${md5(var.deployment_regions[count.index])}"
+  name         = "${var.module_wide_prefix_scope}-ilb-${substr(md5(var.deployment_regions[count.index]), -12, -1)}-${random_string.random_source_api.result}"
   ports        = [
     local.api_port
   ]

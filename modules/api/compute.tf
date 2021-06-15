@@ -7,9 +7,9 @@ resource "random_string" "random_source_api" {
   upper = false
   special = false
   keepers = {
-    otpapi_template_tags = join("", sort(local.api_template_tags)),
-    otpapi_template_machine_type = local.api_template_machine_type,
-    otpapi_template_source_image = local.api_template_source_image,
+    api_template_tags = join("", sort(local.api_template_tags)),
+    api_template_machine_type = local.api_template_machine_type,
+    api_template_source_image = local.api_template_source_image,
     vm_api_image_version = var.vm_api_image_version
   }
 }
@@ -71,8 +71,8 @@ project = var.project_id
       {
         SLICK_CLICKHOUSE_URL = "jdbc:clickhouse://${var.backend_connection_map[var.deployment_regions[count.index]].host_clickhouse}:8123",
         ELASTICSEARCH_HOST = var.backend_connection_map[var.deployment_regions[count.index]].host_elastic_search,
-        PLATFORM_API_VERSION = var.vm_api_image_version,
-        OTP_API_PORT = local.api_port
+        API_VERSION = var.vm_api_image_version,
+        API_PORT = local.api_port
       }
     )
     google-logging-enabled = true
