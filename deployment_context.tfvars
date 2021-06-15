@@ -13,7 +13,7 @@ config_dns_project_id                       = "open-targets-eu-dev"
 config_dns_subdomain_prefix                 = "mbdev"
 config_dns_managed_zone_name                = "opentargets-xyz"
 config_dns_managed_zone_dns_name            = "opentargets.xyz."
-config_dns_platform_api_subdomain           = "api"
+config_dns_api_subdomain           = "api"
 
 // --- Elastic Search configuration    --- //
 // [XXX WARNING - DEV - USING PLATFORM IMAGE FOR TESTING PROVISIONER" XXX] //
