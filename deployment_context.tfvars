@@ -9,8 +9,14 @@ config_project_id         = "open-targets-eu-dev"
 config_deployment_regions = ["europe-west1"]
 
 // TODO --- DNS configuration               --- //
+config_dns_project_id                       = "open-targets-eu-dev"
+config_dns_subdomain_prefix                 = "mbdev"
+config_dns_managed_zone_name                = "opentargets-xyz"
+config_dns_managed_zone_dns_name            = "opentargets.xyz."
+config_dns_platform_api_subdomain           = "api"
 
 // --- Elastic Search configuration    --- //
+// [XXX WARNING - DEV - USING PLATFORM IMAGE FOR TESTING PROVISIONER" XXX] //
 config_vm_elastic_search_image_project  = "open-targets-eu-dev"
 config_vm_elastic_search_vcpus          = "4"
 config_vm_elastic_search_mem            = "26624"
@@ -19,6 +25,7 @@ config_vm_elastic_search_version        = "7.9.0"
 config_vm_elastic_search_boot_disk_size = "500GB"
 
 // --- Clickhouse configuration        --- //
+// [XXX WARNING - DEV - USING PLATFORM IMAGE FOR TESTING PROVISIONER" XXX] //
 config_vm_clickhouse_vcpus                  = "4"
 config_vm_clickhouse_mem                    = "26624"
 config_vm_clickhouse_image                  = "platform-etl-ch-21-04-3"
@@ -26,6 +33,7 @@ config_vm_clickhouse_image_project          = "open-targets-eu-dev"
 config_vm_clickhouse_boot_disk_size         = "250GB"
 
 // --- API configuration               --- //
+// [XXX WARNING - DEV - USING PLATFORM IMAGE FOR TESTING PROVISIONER" XXX] //
 config_vm_api_image_version        = "21.04.5"
 config_vm_api_vcpus                         = "2"
 config_vm_api_mem                           = "7680"
