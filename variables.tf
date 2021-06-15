@@ -31,34 +31,34 @@ variable "config_deployment_regions" {
 // --- DNS Configuration --- //
 variable "config_dns_project_id" {
   description = "Project ID to use when making changes to Cloud DNS service"
-  type = string
+  type        = string
 }
 
 variable "config_dns_managed_zone_name" {
   description = "Name of the Cloud DNS managed zone to use for DNS changes"
-  type = string
+  type        = string
 }
 
 variable "config_dns_managed_zone_dns_name" {
   description = "Domain name that is being managed in the given managed DNS zone, a.k.a. Cloud DNS -> Managed Zone -> DNS Name"
-  type = string
+  type        = string
 }
 
 variable "config_dns_subdomain_prefix" {
   description = "DNS subdomain prefix to use for anything this deployment definition adds to the DNS information"
-  default = null
+  default     = null
 }
 
 variable "config_dns_api_subdomain" {
   description = "Subdomain for API DNS entry, default 'api'"
-  type = string
-  default = "api"
+  type        = string
+  default     = "api"
 }
 
 variable "config_dns_base_subdomain" {
   description = "Subdomain for Open Targets Genetics Portal Web App, default 'genetics'"
-  type = string
-  default = "genetics"
+  type        = string
+  default     = "genetics"
 }
 
 // --- Elastic Search configuration    --- //
@@ -94,53 +94,53 @@ variable "config_vm_elastic_search_boot_disk_size" {
 // --- Clickhouse configuration        --- //
 variable "config_vm_clickhouse_vcpus" {
   description = "CPU count for Clickhouse instances"
-  type = number
+  type        = number
 }
 
 variable "config_vm_clickhouse_mem" {
   description = "Amount of memory allocated for Clickhouse instances"
-  type = number
+  type        = number
 }
 
 variable "config_vm_clickhouse_image" {
   description = "Image to use for launching Clickhouse instances"
-  type = string
+  type        = string
 }
 
 variable "config_vm_clickhouse_image_project" {
   description = "Project where to find the instance image to use"
-  type = string
+  type        = string
 }
 
 variable "config_vm_clickhouse_boot_disk_size" {
   description = "Boot disk size to be used in Clickhouse instances"
-  type = string
+  type        = string
 }
 
 // --- API configuration               --- //
 variable "config_vm_api_image_version" {
   description = "API docker image version to use"
-  type = string
+  type        = string
 }
 variable "config_vm_api_vcpus" {
   description = "CPU count for API nodes"
-  type = number
+  type        = number
 }
 variable "config_vm_api_mem" {
   description = "Memory allocation for API VMs (MiB)"
-  type = number
+  type        = number
 }
 variable "config_vm_api_image" {
   description = "VM image to use for running API nodes"
-  type = string
+  type        = string
 }
 variable "config_vm_api_image_project" {
   description = "Project hosting the API VM image"
-  type = string
+  type        = string
 }
 variable "config_vm_api_boot_disk_size" {
   description = "Boot disk size for API VM nodes"
-  type = string
+  type        = string
 }
 
 // --- Web Application configuration   --- //

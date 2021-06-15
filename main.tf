@@ -72,69 +72,69 @@ module "backend_elastic_search" {
 // --- Clickhouse Backend --- //
 module "backend_clickhouse" {
   source = "./modules/clickhouse"
-  count = length(var.config_deployment_regions)
+  count  = length(var.config_deployment_regions)
 
-  depends_on = [ module.vpc_network ]
+  depends_on               = [module.vpc_network]
   module_wide_prefix_scope = "${var.config_release_name}-ch-${local.gcp_regions_static_indexing[var.config_deployment_regions[count.index]]}"
-  project_id = var.config_project_id
-  network_name = module.vpc_network.network_name
-  network_self_link = module.vpc_network.network_self_link
-  network_subnet_name = local.vpc_network_main_subnet_name
-  network_source_ranges = [ 
+  project_id               = var.config_project_id
+  network_name             = module.vpc_network.network_name
+  network_self_link        = module.vpc_network.network_self_link
+  network_subnet_name      = local.vpc_network_main_subnet_name
+  network_source_ranges = [
     local.vpc_network_region_subnet_map[var.config_deployment_regions[count.index]].subnet_ip
   ]
-  vm_clickhouse_vcpus = var.config_vm_clickhouse_vcpus
-  vm_clickhouse_mem = var.config_vm_clickhouse_mem
-  vm_clickhouse_image = var.config_vm_clickhouse_image
-  vm_clickhouse_image_project = var.config_vm_clickhouse_image_project
+  vm_clickhouse_vcpus          = var.config_vm_clickhouse_vcpus
+  vm_clickhouse_mem            = var.config_vm_clickhouse_mem
+  vm_clickhouse_image          = var.config_vm_clickhouse_image
+  vm_clickhouse_image_project  = var.config_vm_clickhouse_image_project
   vm_clickhouse_boot_disk_size = var.config_vm_clickhouse_boot_disk_size
   // Additional firewall tags if development mode is 'ON'
-  vm_firewall_tags = local.dev_fw_tags
-  deployment_region = var.config_deployment_regions[count.index]
+  vm_firewall_tags       = local.dev_fw_tags
+  deployment_region      = var.config_deployment_regions[count.index]
   deployment_target_size = 1
 }
 
 // --- API --- //
 module "backend_api" {
-  source = "./modules/api"
+  source     = "./modules/api"
   project_id = var.config_project_id
   depends_on = [
     module.vpc_network,
     module.backend_elastic_search,
     module.backend_clickhouse
   ]
-  gcp_available_region_names         = local.gcp_available_region_names_sorted
-  module_wide_prefix_scope = "${var.config_release_name}-api"
-  network_name = module.vpc_network.network_name
-  network_self_link = module.vpc_network.network_self_link
-  network_subnet_name = local.vpc_network_main_subnet_name
+  gcp_available_region_names = local.gcp_available_region_names_sorted
+  module_wide_prefix_scope   = "${var.config_release_name}-api"
+  network_name               = module.vpc_network.network_name
+  network_self_link          = module.vpc_network.network_self_link
+  network_subnet_name        = local.vpc_network_main_subnet_name
   network_source_ranges_map = zipmap(
     var.config_deployment_regions,
-    [ 
-      for region in var.config_deployment_regions: {
+    [
+      for region in var.config_deployment_regions : {
         source_range = local.vpc_network_region_subnet_map[region].subnet_ip
-      } 
+      }
     ]
   )
   // We are using a root module defined GLB, so we need this tag to be appended to api nodes, for them to be visible to the GLB. Include development mode firewall tags
-  vm_firewall_tags = concat([ local.tag_glb_target_node ], local.dev_fw_tags)
+  vm_firewall_tags = concat([local.tag_glb_target_node], local.dev_fw_tags)
   // API VMs configuration
-  vm_api_image_version = var.config_vm_api_image_version
-  vm_api_vcpus = var.config_vm_api_vcpus
-  vm_api_mem = var.config_vm_api_mem
-  vm_api_image = var.config_vm_api_image
-  vm_api_image_project = var.config_vm_api_image_project
+  vm_api_image_version  = var.config_vm_api_image_version
+  vm_api_vcpus          = var.config_vm_api_vcpus
+  vm_api_mem            = var.config_vm_api_mem
+  vm_api_image          = var.config_vm_api_image
+  vm_api_image_project  = var.config_vm_api_image_project
   vm_api_boot_disk_size = var.config_vm_api_boot_disk_size
   backend_connection_map = zipmap(
     var.config_deployment_regions,
     [
-      for idx, region in var.config_deployment_regions: {
-        host_clickhouse = module.backend_clickhouse[idx].ilb_ip_address
+      for idx, region in var.config_deployment_regions : {
+        host_clickhouse     = module.backend_clickhouse[idx].ilb_ip_address
         host_elastic_search = module.backend_elastic_search[idx].ilb_ip_address
       }
     ]
   )
-  deployment_regions = var.config_deployment_regions
+  deployment_regions     = var.config_deployment_regions
   deployment_target_size = 1
   // This can be
   //  INTERNAL   - ILB
