@@ -14,6 +14,16 @@ locals {
   // Folders --- //
   folder_tmp = abspath("${path.module}/tmp")
 
+  // --- DNS --- //
+  // The effective DNS name is the one taking into account a possible subdomain that should scope the deployment
+  dns_effective_dns_name = (var.config_dns_subdomain_prefix == null ? var.config_dns_managed_zone_dns_name : "${var.config_dns_subdomain_prefix}.${var.config_dns_managed_zone_dns_name}")
+  dns_base_name = "${var.config_dns_base_subdomain}.${local.dns_effective_dns_name}"
+  dns_api_dns_name = "${var.config_dns_platform_api_subdomain}.${local.dns_platform_base_name}"
+  dns_webapp_domain_names = [
+    "www.${local.dns_platform_base_name}",
+    local.dns_platform_base_name
+  ]
+
   // Networking --- // 
   vpc_network_name             = "${var.config_release_name}-vpc"
   vpc_network_main_subnet_name = "main-subnet"
