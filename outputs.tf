@@ -53,3 +53,14 @@ output "api_deployments" {
 output "webapp_deployment" {
   value = module.web_app
 }
+
+output "glb" {
+  value = module.glb
+}
+
+output "dns_records" {
+  value = concat(
+    [ google_dns_record_set.dns_a_api_glb ],
+    google_dns_record_set.dns_a_webapp_glb
+  )
+}
