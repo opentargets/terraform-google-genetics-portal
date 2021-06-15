@@ -34,7 +34,7 @@ config_vm_clickhouse_boot_disk_size = "250GB"
 
 // --- API configuration               --- //
 // [XXX WARNING - DEV - USING PLATFORM IMAGE FOR TESTING PROVISIONER" XXX] //
-config_vm_api_image_version  = "21.04.5"
+config_vm_api_image_version  = "20.02.07"
 config_vm_api_vcpus          = "2"
 config_vm_api_mem            = "7680"
 config_vm_api_image          = "cos-stable"
