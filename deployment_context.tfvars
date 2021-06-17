@@ -16,24 +16,21 @@ config_dns_managed_zone_dns_name = "opentargets.xyz."
 config_dns_api_subdomain         = "api"
 
 // --- Elastic Search configuration    --- //
-// [XXX WARNING - DEV - USING PLATFORM IMAGE FOR TESTING PROVISIONER" XXX] //
-config_vm_elastic_search_image_project  = "open-targets-eu-dev"
+config_vm_elastic_search_image_project  = "open-targets-genetics"
 config_vm_elastic_search_vcpus          = "4"
 config_vm_elastic_search_mem            = "26624"
-config_vm_elastic_search_image          = "platform-etl-es-21-04-3"
+config_vm_elastic_search_image          = "opentargets-genetics-ch-200201"
 config_vm_elastic_search_version        = "7.9.0"
 config_vm_elastic_search_boot_disk_size = "500GB"
 
 // --- Clickhouse configuration        --- //
-// [XXX WARNING - DEV - USING PLATFORM IMAGE FOR TESTING PROVISIONER" XXX] //
-config_vm_clickhouse_vcpus          = "4"
-config_vm_clickhouse_mem            = "26624"
-config_vm_clickhouse_image          = "platform-etl-ch-21-04-3"
-config_vm_clickhouse_image_project  = "open-targets-eu-dev"
-config_vm_clickhouse_boot_disk_size = "250GB"
+config_vm_clickhouse_vcpus          = "8"
+config_vm_clickhouse_mem            = "53248"
+config_vm_clickhouse_image          = "opentargets-genetics-ch-200201"
+config_vm_clickhouse_image_project  = "open-targets-genetics"
+config_vm_clickhouse_boot_disk_size = "500GB"
 
 // --- API configuration               --- //
-// [XXX WARNING - DEV - USING PLATFORM IMAGE FOR TESTING PROVISIONER" XXX] //
 config_vm_api_image_version  = "20.02.07"
 config_vm_api_vcpus          = "2"
 config_vm_api_mem            = "7680"
