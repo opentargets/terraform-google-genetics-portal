@@ -9,7 +9,7 @@ module "ilb_ch" {
 
   project = var.project_id
   region       = var.deployment_region
-  name         = "${var.module_wide_prefix_scope}-ilb"
+  name         = "${var.module_wide_prefix_scope}-ilb-${random_string.random_ch_vm.result}"
   ports        = [
     local.clickhouse_http_req_port,
     local.clickhouse_cli_req_port
