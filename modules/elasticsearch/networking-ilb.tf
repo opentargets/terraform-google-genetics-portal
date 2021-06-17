@@ -12,7 +12,7 @@ module "ilb_es" {
   name         = "${var.module_wide_prefix_scope}-ilb-${random_string.random_es_vm.result}"
   ports        = [ local.elastic_search_port_requests ]
   source_tags  = []
-  target_tags  = [local.fw_tag_elasticsearch_requests]
+  target_tags  = [local.fw_tag_elasticsearch_requests, local.fw_tag_elasticsearch_comms]
   create_backend_firewall = false
   network = var.network_name
   subnetwork = var.network_subnet_name

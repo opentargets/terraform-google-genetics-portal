@@ -17,7 +17,7 @@ resource "random_string" "random_es_vm" {
 // Service Account --- //
 resource "google_service_account" "gcp_service_acc_apis" {
     project = var.project_id
-  account_id = "${var.module_wide_prefix_scope}-svc-${random_string.random_es_vm.result}"
+  account_id = "${var.module_wide_prefix_scope}-svc"//-${random_string.random_es_vm.result}"
   display_name = "${var.module_wide_prefix_scope}-GCP-service-account"
 }
 
