@@ -28,8 +28,8 @@ output "api_port_name" {
 }
 
 output "ilb_ip_addresses" {
-  value = zipmap(
+  value = try(zipmap(
     var.deployment_regions,
     [ for ilb in module.ilb_api: ilb.ip_address ]
-  )
+  ), null)
 }

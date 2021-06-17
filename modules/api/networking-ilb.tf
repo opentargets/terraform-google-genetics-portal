@@ -1,6 +1,6 @@
 // --- API Nodes Internal Load Balancer definition --- //
 module "ilb_api" {
-    count = length(var.deployment_regions)
+    count = var.load_balancer_type == local.lb_type_internal ? length(var.deployment_regions) : 0
 
   source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "~> 2.0"
