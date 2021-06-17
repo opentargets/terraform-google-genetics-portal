@@ -43,7 +43,7 @@ config_vm_api_boot_disk_size = "10GB"
 config_webapp_repo_name = "opentargets/genetics-app"
 config_webapp_release   = "21.04.4"
 config_webapp_deployment_context_map = {
-  DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_API_URL      = "'https://api.genetics.mbdev.opentargets.org/graphql'"
+  DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_API_URL      = "'https://api.genetics.mbdev.opentargets.xyz/graphql'"
 }
 // Use 'default' robots.txt profile
 //config_webapp_robots_profile                = "production"
