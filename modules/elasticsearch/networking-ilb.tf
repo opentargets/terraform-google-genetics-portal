@@ -9,7 +9,7 @@ module "ilb_es" {
 
   project = var.project_id
   region       = var.deployment_region
-  name         = "${var.module_wide_prefix_scope}-ilb"
+  name         = "${var.module_wide_prefix_scope}-ilb-${random_string.random_es_vm.result}"
   ports        = [ local.elastic_search_port_requests ]
   source_tags  = []
   target_tags  = [local.fw_tag_elasticsearch_requests]
