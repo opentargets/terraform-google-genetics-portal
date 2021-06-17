@@ -40,11 +40,10 @@ config_vm_api_boot_disk_size = "10GB"
 
 // --- Web Application configuration   --- //
 // [XXX WARNING - DEV - USING PLATFORM APP FOR TESTING PROVISIONER" XXX] //
-config_webapp_repo_name = "opentargets/platform-app"
-config_webapp_release   = "21.04.2"
+config_webapp_repo_name = "opentargets/genetics-app"
+config_webapp_release   = "21.04.4"
 config_webapp_deployment_context_map = {
-  DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_URL_API      = "'https://api.platform.opentargets.org/api/v4/graphql'"
-  DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_URL_API_BETA = "'https://api.platform.opentargets.org/api/v4/graphql'"
+  DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_API_URL      = "'https://api.genetics.opentargets.org/graphql'"
 }
 // Use 'default' robots.txt profile
 //config_webapp_robots_profile                = "production"
