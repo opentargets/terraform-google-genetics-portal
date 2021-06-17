@@ -159,7 +159,8 @@ module "glb" {
         timeout_sec         = null
         healthy_threshold   = null
         unhealthy_threshold = null
-        request_path        = "/admin/health"
+        //request_path        = "/admin/health"
+        request_path = "_ah/health"
         port                = module.backend_api.api_port
         host                = null
         logging             = null
