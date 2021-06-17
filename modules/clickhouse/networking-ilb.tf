@@ -1,4 +1,5 @@
 // --- Clickhouse Internal Load Balancer definition --- //
+// TODO - REVERT BACK TO FULL CONTROL, AND STOP USING THIS MODULE
 module "ilb_ch" {
   source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "~> 2.0"
