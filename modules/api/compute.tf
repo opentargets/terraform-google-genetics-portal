@@ -1,6 +1,4 @@
 // --- Machine Template --- //
-// TODO - Refactor using
-//      https://github.com/terraform-google-modules/terraform-google-vm
 resource "random_string" "random_source_api" {
   length = 8
   lower = true
