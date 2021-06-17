@@ -10,6 +10,7 @@ resource "random_string" "random_es_vm" {
     elastic_search_template_source_image = local.elastic_search_template_source_image,
     elastic_search_template_tags = join("", sort(local.elastic_search_template_tags)),
     vm_elastic_search_version = var.vm_elastic_search_version
+    vm_startup_script = md5(file("${path.module}/scripts/instance_startup.sh"))
   }
 }
 
