@@ -204,16 +204,6 @@ variable "config_webapp_robots_profile" {
   default     = "default"
 }
 
-variable "config_webapp_bucket_name_data_assets" {
-  description = "Bucket where to find the data context for the web application"
-  type        = string
-}
-
-variable "config_webapp_data_context_release" {
-  description = "Data context release for the web application"
-  type        = string
-}
-
 // Web Application Web Servers --- //
 variable "config_webapp_webserver_docker_image_version" {
   description = "NginX Docker image version to use in deployment"
