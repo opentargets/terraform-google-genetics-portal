@@ -18,7 +18,7 @@ resource "random_string" "random_web_server_suffix" {
 // Service Account --- //
 resource "google_service_account" "gcp_service_acc_apis" {
   project = var.project_id
-  account_id = "${var.module_wide_prefix_scope}-svcacc-${random_string.random_web_server_suffix.result}"
+  account_id = "${var.module_wide_prefix_scope}-svcacc"//-${random_string.random_web_server_suffix.result}"
   display_name = "${var.module_wide_prefix_scope}-GCP-service-account"
 }
 
@@ -28,7 +28,7 @@ resource "google_compute_instance_template" "webserver_template" {
 
   project = var.project_id
 
-  name = "${var.module_wide_prefix_scope}-${local.gcp_regions_static_indexing[var.webserver_deployment_regions[count.index]]}-webserver-template-${random_string.random_web_server_suffix.result}"
+  name = "${var.module_wide_prefix_scope}-webserver-template-${substr(md5(var.webserver_deployment_regions[count.index]), -8, -1)}-${random_string.random_web_server_suffix.result}"
   description = "Open Targets Genetics Portal Web Server node template"
   instance_description = "Open Targets Genetics Portal Web Server node, docker image version ${var.webserver_docker_image_version}"
   region = var.webserver_deployment_regions[count.index]
@@ -100,9 +100,9 @@ resource "google_compute_region_instance_group_manager" "regmig_webserver" {
 
   project = var.project_id
 
-  name = "${var.module_wide_prefix_scope}-${local.gcp_regions_static_indexing[var.webserver_deployment_regions[count.index]]}-regmig-webserver"
+  name = "${var.module_wide_prefix_scope}-regmig-webserver-${substr(md5(var.webserver_deployment_regions[count.index]), -8, -1)}"
   region = var.webserver_deployment_regions[count.index]
-  base_instance_name = "${var.module_wide_prefix_scope}-${local.gcp_regions_static_indexing[var.webserver_deployment_regions[count.index]]}-webserver"
+  base_instance_name = "${var.module_wide_prefix_scope}-webserver-${substr(md5(var.webserver_deployment_regions[count.index]), -8, -1)}"
   depends_on = [ 
       google_compute_instance_template.webserver_template,
       module.firewall_rules,
@@ -142,7 +142,7 @@ resource "google_compute_region_autoscaler" "autoscaler_webserver" {
 
   project = var.project_id
 
-  name = "${var.module_wide_prefix_scope}-${local.gcp_regions_static_indexing[var.webserver_deployment_regions[count.index]]}-autoscaler"
+  name = "${var.module_wide_prefix_scope}-autoscaler-${substr(md5(var.webserver_deployment_regions[count.index]), -8, -1)}"
   region = var.webserver_deployment_regions[count.index]
   target = google_compute_region_instance_group_manager.regmig_webserver[count.index].id
 

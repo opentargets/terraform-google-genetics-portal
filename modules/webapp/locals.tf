@@ -6,11 +6,11 @@ locals {
     local.gcp_available_region_names_sorted,
     [for region_details in data.google_compute_zones.gcp_available_zones : region_details.names]
   )
-  gcp_regions_static_indexing = zipmap(
+/*  gcp_regions_static_indexing = zipmap(
     local.gcp_available_region_names_sorted,
     range(0, length(local.gcp_available_region_names_sorted))
   )
-
+*/
   // --- Bucket Configuration --- //
   multiregional_locations = [
     "ASIA",
