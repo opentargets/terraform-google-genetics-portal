@@ -1,4 +1,9 @@
 // --- Machine Template --- //
+// TODO
+//  - When the URL for Elastic search or Clickhouse changes, a new template needs to be generated, and it fails beause that information is not taken into account as a keeper in the 'random_string.random_source_api'
+//    - I would need
+//      - a source of entropy per deployment region
+//      - a rendered version of the startup script per region
 resource "random_string" "random_source_api" {
   length = 8
   lower = true
