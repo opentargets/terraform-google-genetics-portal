@@ -13,7 +13,8 @@ resource "random_string" "random_source_api" {
     api_template_tags = join("", sort(local.api_template_tags)),
     api_template_machine_type = local.api_template_machine_type,
     api_template_source_image = local.api_template_source_image,
-    vm_api_image_version = var.vm_api_image_version
+    vm_api_image_version = var.vm_api_image_version,
+    data_backend_details = md5(jsonencode(var.backend_connection_map))
   }
 }
 
@@ -27,7 +28,7 @@ data "google_compute_zones" "gcp_zones_availability" {
 
 resource "google_service_account" "gcp_service_acc_apis" {
     project = var.project_id
-  account_id = "${var.module_wide_prefix_scope}-svcacc-${random_string.random_source_api.result}"
+  account_id = "${var.module_wide_prefix_scope}-svcacc"//-${random_string.random_source_api.result}"
   display_name = "${var.module_wide_prefix_scope}-GCP-service-account"
 }
 
@@ -35,7 +36,7 @@ resource "google_compute_instance_template" "api_vm_template" {
   count = length(var.deployment_regions)
 
 project = var.project_id
-  name = "${var.module_wide_prefix_scope}-api-template-${substr(md5(var.deployment_regions[count.index]), -18, -1)}-${random_string.random_source_api.result}"
+  name = "${var.module_wide_prefix_scope}-api-template-${substr(md5(var.deployment_regions[count.index]), -8, -1)}-${random_string.random_source_api.result}"
   description = "Open Targets Genetics Portal API node template, API docker image version ${var.vm_api_image_version}"
   instance_description = "Open Targets Genetics Portal API node, API docker image version ${var.vm_api_image_version}"
   region = var.deployment_regions[count.index]
