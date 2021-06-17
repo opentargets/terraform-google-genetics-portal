@@ -1,7 +1,4 @@
 // --- Active Web Servers for the web application --- //
-// TODOs:
-//  - Use a regional index map for fixed indexes on the different regions, to avoid the problem of pulling the first region from the list of deploymebnt regions
-//  - 
 
 // Definition of active web servers for the web application
 resource "random_string" "random_web_server_suffix" {
@@ -17,15 +14,6 @@ resource "random_string" "random_web_server_suffix" {
     startup_script = md5(file("${path.module}/scripts/webserver_vm_startup_script.sh"))
   }
 }
-
-// Access to Available compute zones in the given region --- //
-/*data "google_compute_zones" "gcp_zones_available" {
-  count = length(var.webserver_deployment_regions)
-  
-  project = var.project_id
-
-  region = var.webserver_deployment_regions[count.index]
-}*/
 
 // Service Account --- //
 resource "google_service_account" "gcp_service_acc_apis" {
