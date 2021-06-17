@@ -49,22 +49,7 @@ variable "webapp_robots_profile" {
   type = string
   default = "default"
 }
-// Data Context --- //
-variable "webapp_bucket_data_context_name" {
-  description = "Bucket name where to find the web application data context"
-  type = string
-}
 
-variable "webapp_bucket_data_context_release" {
-  description = "Web application data context release to use for deployment"
-  type = string
-}
-
-variable "webapp_bucket_data_context_subfolder_name" {
-  description = "Name of the subfolder within the data context release where to find the data static assets"
-  type = string
-  default = "webapp"
-}
 // TODO Remove this in the next iteration, where the bucket is created in a different way
 variable "website_not_found_page" {
   description = "It defines the website 'not found' page, default 'index.html', this no longer needs to be setup, because the bucket will not be serving the web application"
