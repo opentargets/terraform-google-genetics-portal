@@ -39,7 +39,6 @@ config_vm_api_image_project  = "cos-cloud"
 config_vm_api_boot_disk_size = "10GB"
 
 // --- Web Application configuration   --- //
-// [XXX WARNING - DEV - USING PLATFORM APP FOR TESTING PROVISIONER" XXX] //
 config_webapp_repo_name = "opentargets/genetics-app"
 config_webapp_release   = "21.04.4"
 config_webapp_deployment_context_map = {
