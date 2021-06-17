@@ -5,10 +5,10 @@ config_release_name = "mbdevgen"
 // --- Deployment Configuration --- //
 config_gcp_default_region = "europe-west1"
 config_gcp_default_zone   = "europe-west1-b"
-config_project_id         = "open-targets-eu-dev"
+config_project_id         = "open-targets-genetics-dev"
 config_deployment_regions = ["europe-west1"]
 
-// TODO --- DNS configuration               --- //
+// --- DNS configuration               --- //
 config_dns_project_id            = "open-targets-eu-dev"
 config_dns_subdomain_prefix      = "mbdev"
 config_dns_managed_zone_name     = "opentargets-xyz"
@@ -21,7 +21,7 @@ config_vm_elastic_search_vcpus          = "4"
 config_vm_elastic_search_mem            = "26624"
 config_vm_elastic_search_image          = "opentargets-genetics-ch-200201"
 config_vm_elastic_search_version        = "7.9.0"
-config_vm_elastic_search_boot_disk_size = "500GB"
+config_vm_elastic_search_boot_disk_size = "256GB"
 
 // --- Clickhouse configuration        --- //
 config_vm_clickhouse_vcpus          = "8"
