@@ -3,6 +3,27 @@
 
 // Forwarding rule --- //
 // Backend Service --- //
+resource "google_compute_region_backend_service" "ilb_backend_service" {
+project = var.project_id
+
+  depends_on = [
+      google_compute_region_instance_group_manager.regmig_elastic_search
+    ]
+
+  name = "${var.module_wide_prefix_scope}-ilb-backend-service"
+  region = var.deployment_region
+  load_balancing_scheme = "INTERNAL"
+
+  backend {
+    group = google_compute_region_instance_group_manager.regmig_elastic_search.instance_group
+  }
+
+  protocol = "TCP"
+  timeout_sec = 10
+
+  health_checks = [ google_compute_region_health_check.ilb_backend_healthcheck.id ]
+}
+
 // Health Checks --- //
 resource "google_compute_region_health_check" "ilb_backend_healthcheck" {
   project = var.project_id
