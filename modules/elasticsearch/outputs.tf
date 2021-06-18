@@ -34,6 +34,7 @@ output "port_elastic_search_comms_name" {
 }
 
 // --- DEBUG --- //
-output "ilb_module_data_model" {
+/*output "ilb_module_data_model" {
   value = module.ilb_es
 }
+*/
