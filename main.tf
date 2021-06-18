@@ -149,14 +149,14 @@ module "web_app" {
   depends_on = [
     module.vpc_network
   ]
-  gcp_available_region_names         = local.gcp_available_region_names_sorted
-  module_wide_prefix_scope           = "${var.config_release_name}-web"
-  folder_tmp                         = local.folder_tmp
-  webapp_bucket_location             = var.config_webapp_bucket_location
-  webapp_repo_name                   = var.config_webapp_repo_name
-  webapp_release                     = var.config_webapp_release
-  webapp_deployment_context          = var.config_webapp_deployment_context_map
-  webapp_robots_profile              = var.config_webapp_robots_profile
+  gcp_available_region_names = local.gcp_available_region_names_sorted
+  module_wide_prefix_scope   = "${var.config_release_name}-web"
+  folder_tmp                 = local.folder_tmp
+  webapp_bucket_location     = var.config_webapp_bucket_location
+  webapp_repo_name           = var.config_webapp_repo_name
+  webapp_release             = var.config_webapp_release
+  webapp_deployment_context  = var.config_webapp_deployment_context_map
+  webapp_robots_profile      = var.config_webapp_robots_profile
   // Web Servers Configuration --- //
   network_name        = module.vpc_network.network_name
   network_self_link   = module.vpc_network.network_self_link

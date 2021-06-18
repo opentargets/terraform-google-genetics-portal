@@ -2,33 +2,33 @@
 // --- Underlying GCP infrastructure --- //
 variable "config_gcp_availability_regions_indexing" {
   description = "This parameters contains a static subindexing for supported availability regions, because sometimes, google API returns less regions than the really available ones, and it messes things up"
-  type = map
+  type        = map(any)
   default = {
-      "asia-east1"              = 0
-      "asia-east2"              = 1
-      "asia-northeast1"         = 2
-      "asia-northeast2"         = 3
-      "asia-northeast3"         = 4
-      "asia-south1"             = 5
-      "asia-southeast1"         = 6
-      "asia-southeast2"         = 7
-      "australia-southeast1"    = 8
-      "europe-central2"         = 9
-      "europe-north1"           = 10
-      "europe-west1"            = 11
-      "europe-west2"            = 12
-      "europe-west3"            = 13
-      "europe-west4"            = 14
-      "europe-west6"            = 15
-      "northamerica-northeast1" = 16
-      "southamerica-east1"      = 17
-      "us-central1"             = 18
-      "us-east1"                = 19
-      "us-east4"                = 20
-      "us-west1"                = 21
-      "us-west2"                = 22
-      "us-west3"                = 23
-      "us-west4"                = 24
+    "asia-east1"              = 0
+    "asia-east2"              = 1
+    "asia-northeast1"         = 2
+    "asia-northeast2"         = 3
+    "asia-northeast3"         = 4
+    "asia-south1"             = 5
+    "asia-southeast1"         = 6
+    "asia-southeast2"         = 7
+    "australia-southeast1"    = 8
+    "europe-central2"         = 9
+    "europe-north1"           = 10
+    "europe-west1"            = 11
+    "europe-west2"            = 12
+    "europe-west3"            = 13
+    "europe-west4"            = 14
+    "europe-west6"            = 15
+    "northamerica-northeast1" = 16
+    "southamerica-east1"      = 17
+    "us-central1"             = 18
+    "us-east1"                = 19
+    "us-east4"                = 20
+    "us-west1"                = 21
+    "us-west2"                = 22
+    "us-west3"                = 23
+    "us-west4"                = 24
   }
 }
 
