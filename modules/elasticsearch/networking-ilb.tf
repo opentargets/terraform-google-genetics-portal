@@ -2,6 +2,22 @@
 // TODO - REVERT BACK TO FULL CONTROL, AND STOP USING THIS MODULE
 
 // Forwarding rule --- //
+resource "google_compute_forwarding_rule" "ilb_forwarding_rule" {
+project = var.project_id
+
+  depends_on = [
+      google_compute_region_backend_service.ilb_backend_service
+    ]
+
+  name = "${var.module_wide_prefix_scope}-ilb-forwarding-rule"
+  region = var.deployment_region
+  load_balancing_scheme = "INTERNAL"
+  network = var.network_self_link
+  subnetwork = var.network_subnet_name
+  backend_service = google_compute_region_backend_service.ilb_backend_service.id
+  ports = [ local.elastic_search_port_requests ]
+}
+
 // Backend Service --- //
 resource "google_compute_region_backend_service" "ilb_backend_service" {
 project = var.project_id
