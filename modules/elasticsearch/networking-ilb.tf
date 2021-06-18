@@ -53,18 +53,7 @@ resource "google_compute_region_health_check" "ilb_backend_healthcheck" {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-module "ilb_es" {
+/*module "ilb_es" {
   source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "~> 2.0"
 
@@ -102,4 +91,4 @@ module "ilb_es" {
         description = "Elastic Search regional instance group for '${var.deployment_region}'"
         },
   ]
-}
+}*/
