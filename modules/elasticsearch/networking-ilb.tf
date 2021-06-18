@@ -1,6 +1,4 @@
 // --- Elastic Search Internal Load Balancer definition --- //
-// TODO - REVERT BACK TO FULL CONTROL, AND STOP USING THIS MODULE
-
 // Forwarding rule --- //
 resource "google_compute_forwarding_rule" "ilb_forwarding_rule" {
 project = var.project_id
