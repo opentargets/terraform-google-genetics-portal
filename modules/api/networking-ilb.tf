@@ -1,4 +1,5 @@
 // --- API Nodes Internal Load Balancer definition --- //
+// This ILB definition will keep using the Google module, because the main use case for this is within the context of a development environment
 module "ilb_api" {
     count = var.load_balancer_type == local.lb_type_internal ? length(var.deployment_regions) : 0
 
