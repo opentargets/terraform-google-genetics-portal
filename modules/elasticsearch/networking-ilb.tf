@@ -1,5 +1,32 @@
 // --- Elastic Search Internal Load Balancer definition --- //
 // TODO - REVERT BACK TO FULL CONTROL, AND STOP USING THIS MODULE
+
+// Forwarding rule --- //
+// Backend Service --- //
+// Health Checks --- //
+resource "google_compute_region_health_check" "ilb_backend_healthcheck" {
+  project = var.project_id
+
+  name = "${var.module_wide_prefix_scope}-ilb-backend-healthcheck"
+  region = var.deployment_region
+
+  tcp_health_check {
+    // Elastic Search Requests Port
+    port = local.elastic_search_port_requests
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 module "ilb_es" {
   source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "~> 2.0"
