@@ -1,6 +1,6 @@
 // --- DEVELOPMENT - Deployment Context --- //
 // --- Release Information --- //
-config_release_name = "mbdevgen"
+config_release_name = "devgen2106"
 
 // --- Deployment Configuration --- //
 config_gcp_default_region = "europe-west1"
@@ -10,39 +10,39 @@ config_deployment_regions = ["europe-west1"]
 
 // --- DNS configuration               --- //
 config_dns_project_id            = "open-targets-eu-dev"
-config_dns_subdomain_prefix      = "mbdev"
+config_dns_subdomain_prefix      = "devgen2106"
 config_dns_managed_zone_name     = "opentargets-xyz"
 config_dns_managed_zone_dns_name = "opentargets.xyz."
 config_dns_api_subdomain         = "api"
 
 // --- Elastic Search configuration    --- //
-config_vm_elastic_search_image_project  = "open-targets-genetics"
+config_vm_elastic_search_image_project  = "open-targets-genetics-dev"
+config_vm_elastic_search_image          = "elasticsearch-genetics-node-21060215-2106"
 config_vm_elastic_search_vcpus          = "4"
 config_vm_elastic_search_mem            = "26624"
-config_vm_elastic_search_image          = "opentargets-genetics-ch-200201"
 config_vm_elastic_search_version        = "7.9.0"
-config_vm_elastic_search_boot_disk_size = "256GB"
+config_vm_elastic_search_boot_disk_size = "250GB"
 
 // --- Clickhouse configuration        --- //
+config_vm_clickhouse_image_project  = "open-targets-genetics-dev"
+config_vm_clickhouse_image          = "clickhouse-genetics-node-21060215-2106"
 config_vm_clickhouse_vcpus          = "8"
 config_vm_clickhouse_mem            = "53248"
-config_vm_clickhouse_image          = "opentargets-genetics-ch-200201"
-config_vm_clickhouse_image_project  = "open-targets-genetics"
-config_vm_clickhouse_boot_disk_size = "500GB"
+config_vm_clickhouse_boot_disk_size = "750GB"
 
 // --- API configuration               --- //
-config_vm_api_image_version  = "20.02.07"
-config_vm_api_vcpus          = "2"
-config_vm_api_mem            = "7680"
+config_vm_api_image_version  = "21.06.02"
 config_vm_api_image          = "cos-stable"
 config_vm_api_image_project  = "cos-cloud"
+config_vm_api_vcpus          = "2"
+config_vm_api_mem            = "7680"
 config_vm_api_boot_disk_size = "10GB"
 
 // --- Web Application configuration   --- //
 config_webapp_repo_name = "opentargets/genetics-app"
 config_webapp_release   = "21.06.2"
 config_webapp_deployment_context_map = {
-  DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_API_URL = "'https://api.genetics.mbdev.opentargets.xyz/graphql'"
+  DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_API_URL = "'https://api.genetics.devgen2106.opentargets.xyz/graphql'"
   // DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_GOOGLE_TAG_MANAGER_ID = "'GTM-PNQWZ2V'"
 }
 // Use 'default' robots.txt profile
