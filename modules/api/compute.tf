@@ -73,7 +73,7 @@ project = var.project_id
     startup-script = templatefile(
       "${path.module}/scripts/instance_startup.sh",
       {
-        SLICK_CLICKHOUSE_URL = "jdbc:clickhouse://${var.backend_connection_map[var.deployment_regions[count.index]].host_clickhouse}:8123",
+        SLICK_CLICKHOUSE_URL = "jdbc:clickhouse://${var.backend_connection_map[var.deployment_regions[count.index]].host_clickhouse}:8123/ot",
         ELASTICSEARCH_HOST = var.backend_connection_map[var.deployment_regions[count.index]].host_elastic_search,
         API_VERSION = var.vm_api_image_version,
         API_PORT = local.api_port
