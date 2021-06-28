@@ -43,7 +43,7 @@ config_webapp_repo_name = "opentargets/genetics-app"
 config_webapp_release   = "21.06.1"
 config_webapp_deployment_context_map = {
   DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_API_URL = "'https://api.genetics.mbdev.opentargets.xyz/graphql'"
-  // DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_GOOGLE_TAG_MANAGER_ID = "''"
+  // DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_GOOGLE_TAG_MANAGER_ID = "'GTM-PNQWZ2V'"
 }
 // Use 'default' robots.txt profile
 //config_webapp_robots_profile                = "production"
