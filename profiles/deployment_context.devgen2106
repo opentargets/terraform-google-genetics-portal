@@ -31,7 +31,7 @@ config_vm_clickhouse_mem            = "53248"
 config_vm_clickhouse_boot_disk_size = "750GB"
 
 // --- API configuration               --- //
-config_vm_api_image_version  = "21.06.03"
+config_vm_api_image_version  = "21.06.04"
 config_vm_api_image          = "cos-stable"
 config_vm_api_image_project  = "cos-cloud"
 config_vm_api_vcpus          = "2"
