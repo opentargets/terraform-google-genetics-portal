@@ -2,6 +2,7 @@
 # Startup script for Elastic Search VM Instance
 
 echo "---> [LAUNCH] Open Targets Genetics Portal Elastic Search"
+# In the case of this platform, we don't use Docker for launching ES services.
 # Get machine available memory
 #export MACHINE_SIZE=`cat /proc/meminfo | grep MemTotal | grep -o '[0-9]\+'`
 # Set half the available RAM for the JVM
@@ -12,6 +13,7 @@ echo "---> [LAUNCH] Open Targets Genetics Portal Elastic Search"
 # Launch Elastic Search
 #docker run -d \
 #  --name elasticsearch \
+#  --log-driver=gcplogs \
 #  -p 9200:9200 \
 #  -p 9300:9300 \
 #  -e discovery.type=single-node \
