@@ -20,6 +20,14 @@ server {
 
     server_name _;
 
+    brotli              on;
+    brotli_comp_level   11;
+    brotli_static       off;
+    brotli_types        application/atom+xml application/javascript application/json application/rss+xml application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype application/x-font-ttf application/x-javascript application/xhtml+xml application/xml font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
+    
+    keepalive_timeout 650;
+    keepalive_requests 10000;
+
     root /srv/site;
     index index.html;
 
@@ -38,7 +46,8 @@ find $${www_data_root} -type d -exec chmod 755 \{} \;
 find $${www_data_root} -type f -exec chmod 644 \{} \;
 echo "[START] Nginx web server launching"
 docker run -d \
+    --log-driver=gcplogs \
     -p 8080:8080 \
     -v $${site_folder}:/srv/site \
     -v $${nginx_conf_folder}:/etc/nginx/conf.d \
-    nginx:${docker_image_version}
+    macbre/nginx-http3:${docker_image_version}
