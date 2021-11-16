@@ -120,7 +120,7 @@ module "glb" {
       groups = [
         for region, regmig in module.web_app.map_region_to_instance_group_manager : {
           group                        = regmig.instance_group
-          balancing_mode               = "RATE"
+          balancing_mode               = "UTILIZATION"
           capacity_scaler              = null
           description                  = "Web App backend for region '${region}'"
           max_connections              = null
@@ -175,7 +175,7 @@ module "glb" {
       groups = [
         for region, regmig in module.backend_api.map_region_to_instance_group_manager : {
           group                        = regmig.instance_group
-          balancing_mode               = "RATE"
+          balancing_mode               = "UTILIZATION"
           capacity_scaler              = null
           description                  = "API backend for region '${region}'"
           max_connections              = null
