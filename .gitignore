@@ -19,3 +19,6 @@ tmp/
 
 # Credentials
 credentials
+
+# Backup files
+**/*.bak
