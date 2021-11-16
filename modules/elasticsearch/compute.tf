@@ -14,12 +14,25 @@ resource "random_string" "random_es_vm" {
   }
 }
 
-// Service Account --- //
+// --- Service Account Configuration ---
 resource "google_service_account" "gcp_service_acc_apis" {
     project = var.project_id
   account_id = "${var.module_wide_prefix_scope}-svc"//-${random_string.random_es_vm.result}"
   display_name = "${var.module_wide_prefix_scope}-GCP-service-account"
 }
+
+// Roles ---
+resource "google_project_iam_member" "logging-writer" {
+  project = var.project_id
+  role = "roles/logging.logWriter"
+  member = "serviceAccount:${google_service_account.gcp_service_acc_apis.email}"
+}
+resource "google_project_iam_member" "monitoring-writer" {
+  project = var.project_id
+  role = "roles/monitoring.metricWriter"
+  member = "serviceAccount:${google_service_account.gcp_service_acc_apis.email}"
+}
+// --- /Service Account Configuration/ ---
 
 // Elastic Search instance template definition --- //
 resource "google_compute_instance_template" "elastic_search_template" {
@@ -69,7 +82,7 @@ resource "google_compute_instance_template" "elastic_search_template" {
   service_account {
       // TODO - Do I really need a service account for logging?
     email = google_service_account.gcp_service_acc_apis.email
-    scopes = [ "cloud-platform" ]
+    scopes = [ "cloud-platform", "logging-write", "monitoring-write" ]
   }
 }
 
