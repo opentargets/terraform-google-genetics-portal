@@ -15,12 +15,25 @@ resource "random_string" "random_web_server_suffix" {
   }
 }
 
-// Service Account --- //
+// --- Service Account Configuration ---
 resource "google_service_account" "gcp_service_acc_apis" {
   project = var.project_id
   account_id = "${var.module_wide_prefix_scope}-svcacc"//-${random_string.random_web_server_suffix.result}"
   display_name = "${var.module_wide_prefix_scope}-GCP-service-account"
 }
+
+// Roles ---
+resource "google_project_iam_member" "logging-writer" {
+  project = var.project_id
+  role = "roles/logging.logWriter"
+  member = "serviceAccount:${google_service_account.gcp_service_acc_apis.email}"
+}
+resource "google_project_iam_member" "monitoring-writer" {
+  project = var.project_id
+  role = "roles/monitoring.metricWriter"
+  member = "serviceAccount:${google_service_account.gcp_service_acc_apis.email}"
+}
+// --- /Service Account Configuration/ ---
 
 // Instance Template --- //
 resource "google_compute_instance_template" "webserver_template" {
@@ -75,7 +88,7 @@ resource "google_compute_instance_template" "webserver_template" {
   service_account {
       // TODO Do I really need a service account for the logs to reach the logging system?
     email = google_service_account.gcp_service_acc_apis.email
-    scopes = [ "cloud-platform" ]
+    scopes = [ "cloud-platform", "logging-write", "monitoring-write" ]
   }
 }
 
