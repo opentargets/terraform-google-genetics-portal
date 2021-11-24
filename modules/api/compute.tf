@@ -134,7 +134,7 @@ project = var.project_id
     instance_template = google_compute_instance_template.api_vm_template[count.index].id
   }
 
-  target_size = var.deployment_target_size
+  //target_size = var.deployment_target_size
 
   named_port {
     name = local.api_port_name
