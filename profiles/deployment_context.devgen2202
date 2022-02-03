@@ -25,7 +25,7 @@ config_vm_elastic_search_boot_disk_size = "250GB"
 
 // --- Clickhouse configuration        --- //
 config_vm_clickhouse_image_project  = "open-targets-genetics-dev"
-config_vm_clickhouse_image          = "clickhouse-genetics-image-22020115"
+config_vm_clickhouse_image          = "clickhouse-genetics-image-22020203"
 config_vm_clickhouse_vcpus          = "8"
 config_vm_clickhouse_mem            = "53248"
 config_vm_clickhouse_boot_disk_size = "750GB"
