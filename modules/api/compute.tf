@@ -14,7 +14,8 @@ resource "random_string" "random_source_api" {
     api_template_machine_type = local.api_template_machine_type,
     api_template_source_image = local.api_template_source_image,
     vm_api_image_version = var.vm_api_image_version,
-    data_backend_details = md5(jsonencode(var.backend_connection_map))
+    data_backend_details = md5(jsonencode(var.backend_connection_map)),
+    vm_flag_preemptible = var.vm_flag_preemptible
   }
 }
 

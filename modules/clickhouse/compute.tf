@@ -12,7 +12,8 @@ resource "random_string" "random_ch_vm" {
   keepers = {
     clickhouse_template_tags = join("", sort(local.clickhouse_template_tags)),
     clickhouse_template_machine_type = local.clickhouse_template_machine_type,
-    clickhouse_template_source_image = local.clickhouse_template_source_image
+    clickhouse_template_source_image = local.clickhouse_template_source_image,
+    vm_flag_preemptible = var.vm_flag_preemptible
   }
 }
 
