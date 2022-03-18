@@ -53,3 +53,9 @@ config_webapp_webserver_docker_image_version = "1.21.3"
 // --- Development features                 --- //
 config_enable_inspection = true
 config_enable_ssh        = true
+
+// --- PREEMPTIBLE Configuration --- //
+config_vm_elasticsearch_flag_preemptible = true
+config_vm_clickhouse_flag_preemptible = true
+config_vm_api_flag_preemptible       = true
+config_vm_webserver_flag_preemptible         = true
