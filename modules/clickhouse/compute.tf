@@ -12,7 +12,8 @@ resource "random_string" "random_ch_vm" {
   keepers = {
     clickhouse_template_tags = join("", sort(local.clickhouse_template_tags)),
     clickhouse_template_machine_type = local.clickhouse_template_machine_type,
-    clickhouse_template_source_image = local.clickhouse_template_source_image
+    clickhouse_template_source_image = local.clickhouse_template_source_image,
+    vm_flag_preemptible = var.vm_flag_preemptible
   }
 }
 
@@ -50,8 +51,10 @@ resource "google_compute_instance_template" "clickhouse_template" {
   can_ip_forward = false
 
   scheduling {
-    automatic_restart = true
-    on_host_maintenance = "MIGRATE"
+    automatic_restart = !var.vm_flag_preemptible
+    on_host_maintenance = var.vm_flag_preemptible ? "TERMINATE" : "MIGRATE"
+    preemptible = var.vm_flag_preemptible
+    //provisioning_model = "SPOT"
   }
 
   disk {
@@ -113,7 +116,7 @@ resource "google_compute_region_instance_group_manager" "regmig_clickhouse" {
     instance_template = google_compute_instance_template.clickhouse_template.id
   }
 
-  target_size = var.deployment_target_size
+  //target_size = var.deployment_target_size
 
   named_port {
     name = local.clickhouse_http_req_port_name

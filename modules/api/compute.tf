@@ -14,7 +14,8 @@ resource "random_string" "random_source_api" {
     api_template_machine_type = local.api_template_machine_type,
     api_template_source_image = local.api_template_source_image,
     vm_api_image_version = var.vm_api_image_version,
-    data_backend_details = md5(jsonencode(var.backend_connection_map))
+    data_backend_details = md5(jsonencode(var.backend_connection_map)),
+    vm_flag_preemptible = var.vm_flag_preemptible
   }
 }
 
@@ -62,8 +63,10 @@ project = var.project_id
   can_ip_forward = false
 
   scheduling {
-    automatic_restart = true
-    on_host_maintenance = "MIGRATE"
+    automatic_restart = !var.vm_flag_preemptible
+    on_host_maintenance = var.vm_flag_preemptible ? "TERMINATE" : "MIGRATE"
+    preemptible = var.vm_flag_preemptible
+    //provisioning_model = "SPOT"
   }
 
   disk {

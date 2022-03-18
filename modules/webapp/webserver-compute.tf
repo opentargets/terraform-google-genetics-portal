@@ -12,6 +12,7 @@ resource "random_string" "random_web_server_suffix" {
     deployment_bundle_url = local.webapp_deployment_bundle_url
     nginx_docker_image_version = var.webserver_docker_image_version
     startup_script = md5(file("${path.module}/scripts/webserver_vm_startup_script.sh"))
+    vm_flag_preemptible = var.vm_flag_preemptible
   }
 }
 
@@ -52,8 +53,10 @@ resource "google_compute_instance_template" "webserver_template" {
   can_ip_forward = false
 
   scheduling {
-    automatic_restart = true
-    on_host_maintenance = "MIGRATE"
+    automatic_restart = !var.vm_flag_preemptible
+    on_host_maintenance = var.vm_flag_preemptible ? "TERMINATE" : "MIGRATE"
+    preemptible = var.vm_flag_preemptible
+    //provisioning_model = "SPOT"
   }
 
   disk {
@@ -127,7 +130,7 @@ resource "google_compute_region_instance_group_manager" "regmig_webserver" {
     instance_template = google_compute_instance_template.webserver_template[count.index].id
   }
 
-  target_size = var.deployment_target_size
+  //target_size = var.deployment_target_size
 
   named_port {
     name = local.webapp_webserver_port_name

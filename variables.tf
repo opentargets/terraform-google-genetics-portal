@@ -263,3 +263,28 @@ variable "config_inspection_vm_image" {
   default     = "debian-cloud/debian-10"
   type        = string
 }
+
+// --- Preemptible options --- //
+variable "config_vm_elasticsearch_flag_preemptible" {
+  description = "Use this flag for deploying Elastic Search nodes on preemptible VMs, default 'false'"
+  type        = bool
+  default     = false
+}
+
+variable "config_vm_clickhouse_flag_preemptible" {
+  description = "Use this flag for deploying Clickhouse nodes on preemptible VMs, default 'false'"
+  type        = bool
+  default     = false
+}
+
+variable "config_vm_api_flag_preemptible" {
+  description = "Use this flag for deploying API nodes on preemptible VMs, default 'false'"
+  type        = bool
+  default     = false
+}
+
+variable "config_vm_webserver_flag_preemptible" {
+  description = "Use this flag for deploying Web nodes on preemptible VMs, default 'false'"
+  type        = bool
+  default     = false
+}
