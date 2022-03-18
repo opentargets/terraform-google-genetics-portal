@@ -50,8 +50,10 @@ resource "google_compute_instance_template" "clickhouse_template" {
   can_ip_forward = false
 
   scheduling {
-    automatic_restart = true
-    on_host_maintenance = "MIGRATE"
+    automatic_restart = !var.vm_flag_preemptible
+    on_host_maintenance = var.vm_flag_preemptible ? "TERMINATE" : "MIGRATE"
+    preemptible = var.vm_flag_preemptible
+    //provisioning_model = "SPOT"
   }
 
   disk {
