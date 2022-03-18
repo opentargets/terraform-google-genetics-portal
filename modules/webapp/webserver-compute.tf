@@ -130,7 +130,7 @@ resource "google_compute_region_instance_group_manager" "regmig_webserver" {
     instance_template = google_compute_instance_template.webserver_template[count.index].id
   }
 
-  target_size = var.deployment_target_size
+  //target_size = var.deployment_target_size
 
   named_port {
     name = local.webapp_webserver_port_name
