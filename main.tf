@@ -63,6 +63,7 @@ module "backend_elastic_search" {
   vm_elastic_search_image          = var.config_vm_elastic_search_image
   vm_elastic_search_image_project  = var.config_vm_elastic_search_image_project
   vm_elastic_search_boot_disk_size = var.config_vm_elastic_search_boot_disk_size
+  vm_flag_preemptible              = var.config_vm_elasticsearch_flag_preemptible
   // Additional firewall tags if development mode is 'ON'
   vm_firewall_tags       = local.dev_fw_tags
   deployment_region      = var.config_deployment_regions[count.index]
@@ -88,6 +89,7 @@ module "backend_clickhouse" {
   vm_clickhouse_image          = var.config_vm_clickhouse_image
   vm_clickhouse_image_project  = var.config_vm_clickhouse_image_project
   vm_clickhouse_boot_disk_size = var.config_vm_clickhouse_boot_disk_size
+  vm_flag_preemptible          = var.config_vm_clickhouse_flag_preemptible
   // Additional firewall tags if development mode is 'ON'
   vm_firewall_tags       = local.dev_fw_tags
   deployment_region      = var.config_deployment_regions[count.index]
@@ -125,6 +127,7 @@ module "backend_api" {
   vm_api_image          = var.config_vm_api_image
   vm_api_image_project  = var.config_vm_api_image_project
   vm_api_boot_disk_size = var.config_vm_api_boot_disk_size
+  vm_flag_preemptible           = var.config_vm_api_flag_preemptible
   backend_connection_map = zipmap(
     var.config_deployment_regions,
     [
@@ -178,5 +181,9 @@ module "web_app" {
   webserver_vm_image             = var.config_webapp_webserver_vm_image
   webserver_vm_image_project     = var.config_webapp_webserver_vm_image_project
   webserver_vm_boot_disk_size    = var.config_webapp_webserver_vm_boot_disk_size
+  vm_flag_preemptible            = var.config_vm_webserver_flag_preemptible
   deployment_target_size         = 1
 }
+
+
+
