@@ -40,7 +40,7 @@ config_vm_api_boot_disk_size = "10GB"
 
 // --- Web Application configuration   --- //
 config_webapp_repo_name = "opentargets/ot-ui-apps"
-config_webapp_release   = "v0.2.0-beta"
+config_webapp_release   = "v0.2.2-beta"
 config_webapp_deployment_context_map = {
   DEVOPS_CONTEXT_GENETICS_APP_CONFIG_API_URL = "'https://api.genetics.dev.opentargets.xyz/graphql'"
   // DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_GOOGLE_TAG_MANAGER_ID = "'GTM-PNQWZ2V'"
