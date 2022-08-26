@@ -22,3 +22,6 @@ credentials
 
 # Backup files
 **/*.bak
+
+# IDEs
+.vscode*
