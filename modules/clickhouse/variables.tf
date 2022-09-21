@@ -70,6 +70,7 @@ variable "vm_clickhouse_mem" {
 variable "vm_clickhouse_image" {
   description = "VM image to use for Clickhouse nodes"
   type        = string
+  default     = "cos-stable"
 }
 
 variable "vm_clickhouse_version" {
@@ -89,11 +90,12 @@ variable "vm_clickhouse_boot_disk_size" {
   default     = "250GB"
 }
 variable "vm_clickhouse_container_project" {
-  description = "Clickhouse disk snapshot created by GOS"
+  description = "Project hosting container optimised images"
   type        = string
+  default     = "cos-cloud"
 }
 variable "vm_clickhouse_disk_project" {
-  description = "Clickhouse disk snapshot created by GOS"
+  description = "Project hosting snapshot created by GOS"
   type        = string
 }
 variable "vm_clickhouse_disk_name" {
