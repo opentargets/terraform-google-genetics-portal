@@ -84,12 +84,15 @@ module "backend_clickhouse" {
   network_source_ranges = [
     local.vpc_network_region_subnet_map[var.config_deployment_regions[count.index]].subnet_ip
   ]
-  vm_clickhouse_vcpus          = var.config_vm_clickhouse_vcpus
-  vm_clickhouse_mem            = var.config_vm_clickhouse_mem
-  vm_clickhouse_image          = var.config_vm_clickhouse_image
-  vm_clickhouse_image_project  = var.config_vm_clickhouse_image_project
-  vm_clickhouse_boot_disk_size = var.config_vm_clickhouse_boot_disk_size
-  vm_flag_preemptible          = var.config_vm_clickhouse_flag_preemptible
+  vm_clickhouse_vcpus             = var.config_vm_clickhouse_vcpus
+  vm_clickhouse_mem               = var.config_vm_clickhouse_mem
+  vm_clickhouse_image             = var.config_vm_clickhouse_image
+  vm_clickhouse_image_project     = var.config_vm_clickhouse_image_project
+  vm_clickhouse_container_project = var.config_vm_clickhouse_container_project
+  vm_clickhouse_disk_project      = var.config_vm_clickhouse_disk_project
+  vm_clickhouse_disk_name         = var.config_vm_clickhouse_disk_name
+  vm_clickhouse_boot_disk_size    = var.config_vm_clickhouse_boot_disk_size
+  vm_flag_preemptible             = var.config_vm_clickhouse_flag_preemptible
   // Additional firewall tags if development mode is 'ON'
   vm_firewall_tags       = local.dev_fw_tags
   deployment_region      = var.config_deployment_regions[count.index]
@@ -127,7 +130,7 @@ module "backend_api" {
   vm_api_image          = var.config_vm_api_image
   vm_api_image_project  = var.config_vm_api_image_project
   vm_api_boot_disk_size = var.config_vm_api_boot_disk_size
-  vm_flag_preemptible           = var.config_vm_api_flag_preemptible
+  vm_flag_preemptible   = var.config_vm_api_flag_preemptible
   backend_connection_map = zipmap(
     var.config_deployment_regions,
     [
