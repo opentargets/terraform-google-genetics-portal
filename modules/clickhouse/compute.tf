@@ -80,9 +80,8 @@ resource "google_compute_instance_template" "clickhouse_template" {
   }
 
   disk {
-    source = google_compute_disk.clickhouse_disk.self_link
-    // mounted under /dev/disk/by-id/google-clickhouse-disk
-    device_name = "${var.vm_clickhouse_image_project}/${var.vm_clickhouse_disk_name}"
+    source      = google_compute_disk.clickhouse_disk.self_link
+    device_name = local.disk_device_name
     disk_type   = local.disk_type
     mode        = local.disk_mode
   }
@@ -101,7 +100,7 @@ resource "google_compute_instance_template" "clickhouse_template" {
       "${path.module}/scripts/instance_startup.sh",
       {
         CLICKHOUSE_VERSION   = var.vm_clickhouse_version
-        CLICKHOUSE_DEVICE_ID = var.vm_clickhouse_disk_name
+        CLICKHOUSE_DEVICE_ID = local.disk_device_name
       }
     )
     google-logging-enabled = true

@@ -5,6 +5,8 @@ locals {
   disk_type = "pd-ssd"
   disk_mode = "READ_WRITE"
   disk_size = 250
+  // Used when mounted into COS container under /mnt/disks/by-id/<device_name>
+  disk_device_name = "ch"
   // Ports
   clickhouse_http_req_port      = 8123
   clickhouse_cli_req_port       = 9000

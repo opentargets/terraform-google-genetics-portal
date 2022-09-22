@@ -3,7 +3,7 @@
 echo "[LAUNCH] Open Targets Genetics Portal Clickhouse DB"
 
 echo "Prepare CH disk mount"
-ch_mount="/mnt/disks/ch"
+ch_mount="/mnt/disks"
 ch_serv="$ch_mount/var/lib/clickhouse"
 ch_conf="$ch_mount/etc/clickhouse-server/config.d"
 ch_user="$ch_mount/etc/clickhouse-server/user.d"
