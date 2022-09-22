@@ -149,12 +149,25 @@ variable "config_vm_clickhouse_disk_project" {
   description = "Project hosting disk snapshots to deploy"
   type        = string
 }
+variable "config_vm_elastic_search_container_project" {
+  description = "Project hosting container optimised machine images to deploy"
+  type        = string
+}
+
 
 variable "config_vm_clickhouse_disk_name" {
   description = "Disk snapshot for Clickhouse data."
   type        = string
 }
+variable "config_vm_elastic_search_disk_project" {
+  description = "Project hosting disk snapshots to deploy"
+  type        = string
+}
 
+variable "config_vm_elastic_search_disk_name" {
+  description = "Disk snapshot for elastic_search data."
+  type        = string
+}
 variable "config_vm_clickhouse_image_project" {
   description = "Project where to find the instance image to use"
   type        = string

@@ -1,4 +1,4 @@
-// --- Open Targets Genetics Portal Infrastructure      --- //
+/// --- Open Targets Genetics Portal Infrastructure      --- //
 //  Author: Manuel Bernal Llinares <mbdebian@gmail.com> --- //
 
 // --- Provider Configuration --- //
@@ -29,7 +29,6 @@ provider "google-beta" {
 data "google_compute_regions" "gcp_available_regions" {
   project = var.config_project_id
 }
-
 // Availability Zones --- //
 data "google_compute_zones" "gcp_available_zones" {
   count   = length(local.gcp_available_region_names_sorted)
@@ -59,11 +58,14 @@ module "backend_elastic_search" {
   vm_elastic_search_version = var.config_vm_elastic_search_version
   vm_elastic_search_vcpus   = var.config_vm_elastic_search_vcpus
   // Memory size in MiB
-  vm_elastic_search_mem            = var.config_vm_elastic_search_mem
-  vm_elastic_search_image          = var.config_vm_elastic_search_image
-  vm_elastic_search_image_project  = var.config_vm_elastic_search_image_project
-  vm_elastic_search_boot_disk_size = var.config_vm_elastic_search_boot_disk_size
-  vm_flag_preemptible              = var.config_vm_elasticsearch_flag_preemptible
+  vm_elastic_search_mem               = var.config_vm_elastic_search_mem
+  vm_elastic_search_image             = var.config_vm_elastic_search_image
+  vm_elastic_search_image_project     = var.config_vm_elastic_search_image_project
+  vm_elastic_search_boot_disk_size    = var.config_vm_elastic_search_boot_disk_size
+  vm_elastic_search_container_project = var.config_vm_elastic_search_container_project
+  vm_elastic_search_disk_name         = var.config_vm_elastic_search_disk_name
+  vm_elastic_search_disk_project      = var.config_vm_elastic_search_disk_project
+  vm_flag_preemptible                 = var.config_vm_elasticsearch_flag_preemptible
   // Additional firewall tags if development mode is 'ON'
   vm_firewall_tags       = local.dev_fw_tags
   deployment_region      = var.config_deployment_regions[count.index]
