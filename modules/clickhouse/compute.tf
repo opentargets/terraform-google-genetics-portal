@@ -42,7 +42,7 @@ resource "google_project_iam_member" "monitoring-writer" {
 resource "google_compute_disk" "clickhouse_disk" {
   name     = var.vm_clickhouse_disk_name
   project  = var.project_id
-  snapshot = "${var.vm_clickhouse_disk_name}-${random_string.random_ch_vm.result}"
+  snapshot = "https://www.googleapis.com/compute/v1/projects/${var.vm_clickhouse_disk_project}/global/snapshots/${var.clickhouse_disk_name}"
   type     = local.disk_type
   size     = local.disk_size
   labels = {
@@ -84,6 +84,7 @@ resource "google_compute_instance_template" "clickhouse_template" {
     device_name = local.disk_device_name
     disk_type   = local.disk_type
     mode        = local.disk_mode
+    zone        = var.deployment_region
   }
 
   network_interface {

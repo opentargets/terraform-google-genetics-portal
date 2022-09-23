@@ -39,8 +39,8 @@ resource "google_project_iam_member" "monitoring-writer" {
 resource "google_compute_disk" "es_disk" {
   name     = var.vm_elastic_search_disk_name
   project  = var.project_id
-  snapshot = "${var.vm_elastic_search_disk_name}-${random_string.random_es_vm.result}"
   type     = local.disk_type
+  snapshot = "https://www.googleapis.com/compute/v1/projects/${var.vm_elastic_search_disk_project}/global/snapshots/${var.vm_elastic_search_disk_name}"
   size     = local.disk_size
   labels = {
     datatype = "elasticsearch"
@@ -81,6 +81,7 @@ resource "google_compute_instance_template" "elastic_search_template" {
     device_name = var.vm_elastic_search_disk_name
     disk_type   = local.disk_type
     mode        = local.disk_mode
+    zone        = var.deployment_region
   }
   network_interface {
     network    = var.network_name
