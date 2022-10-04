@@ -25,7 +25,7 @@ config_vm_elastic_search_mem            = "26624"
 config_vm_elastic_search_version        = "7.10.2"
 config_vm_elastic_search_boot_disk_size = "10GB"
 config_vm_elastic_search_disk_project = "open-targets-genetics-dev"
-config_vm_elastic_search_disk_name = "snap-es-disk-1w93uzio"
+config_vm_elastic_search_disk_name = "es-disk-114jsnbs-image"
 // --- Clickhouse configuration        --- //
 config_vm_clickhouse_image_project  = "open-targets-genetics-dev"
 config_vm_clickhouse_container_project = "cos-cloud"
@@ -34,7 +34,7 @@ config_vm_clickhouse_vcpus          = "8"
 config_vm_clickhouse_mem            = "53248"
 config_vm_clickhouse_boot_disk_size = "50GB"
 config_vm_clickhouse_disk_project = "open-targets-genetics-dev"
-config_vm_clickhouse_disk_name = "snap-ch-disk-1w93uzio"
+config_vm_clickhouse_disk_name = "ch-disk-114jsnbs-image"
 
 // --- API configuration               --- //
 config_vm_api_image_version  = "22.09.0"

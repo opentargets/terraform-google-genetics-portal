@@ -8,6 +8,7 @@ resource "random_string" "random_es_vm" {
   keepers = {
     elastic_search_template_machine_type = local.elastic_search_template_machine_type,
     elastic_search_template_source_image = local.elastic_search_template_source_image,
+    elastic_search_disk_name             = var.vm_elastic_search_disk_name,
     elastic_search_disk                  = local.elastic_search_disk,
     elastic_search_template_tags         = join("", sort(local.elastic_search_template_tags)),
     vm_elastic_search_version            = var.vm_elastic_search_version
@@ -84,7 +85,7 @@ resource "google_compute_instance_template" "elastic_search_template" {
     startup-script = templatefile(
       "${path.module}/scripts/instance_startup.sh",
       {
-        ES_DEVICE_ID           = local.disk_mount_name
+        ES_DEVICE_ID           = var.vm_elastic_search_disk_name
         ELASTIC_SEARCH_VERSION = var.vm_elastic_search_version
       }
     )

@@ -14,6 +14,7 @@ resource "random_string" "random_ch_vm" {
     clickhouse_template_machine_type = local.clickhouse_template_machine_type,
     clickhouse_template_source_image = local.clickhouse_template_source_image,
     clickhouse_disk                  = local.clickhouse_disk,
+    clickhouse_disk_name             = var.vm_clickhouse_disk_name,
     vm_flag_preemptible              = var.vm_flag_preemptible,
     vm_startup_script                = md5(file("${path.module}/scripts/instance_startup.sh"))
   }
@@ -88,7 +89,7 @@ resource "google_compute_instance_template" "clickhouse_template" {
       "${path.module}/scripts/instance_startup.sh",
       {
         CLICKHOUSE_VERSION   = var.vm_clickhouse_version
-        CLICKHOUSE_DEVICE_ID = local.disk_device_name
+        CLICKHOUSE_DEVICE_ID = var.vm_clickhouse_disk_name
       }
     )
     google-logging-enabled = true
