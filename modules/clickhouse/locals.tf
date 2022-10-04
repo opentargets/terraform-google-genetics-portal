@@ -2,9 +2,10 @@
 locals {
 
   // Disk
-  disk_type = "pd-ssd"
-  disk_mode = "READ_WRITE"
-  disk_size = 250
+  clickhouse_disk = "${var.project_id}/${var.vm_clickhouse_disk_name}"
+  disk_type       = "pd-ssd"
+  disk_mode       = "READ_WRITE"
+  disk_size       = 250
   // Used when mounted into COS container under /mnt/disks/by-id/<device_name>
   disk_device_name = "ch"
   // Ports

@@ -8,6 +8,7 @@ resource "random_string" "random_es_vm" {
   keepers = {
     elastic_search_template_machine_type = local.elastic_search_template_machine_type,
     elastic_search_template_source_image = local.elastic_search_template_source_image,
+    elastic_search_disk                  = local.elastic_search_disk,
     elastic_search_template_tags         = join("", sort(local.elastic_search_template_tags)),
     vm_elastic_search_version            = var.vm_elastic_search_version
     vm_startup_script                    = md5(file("${path.module}/scripts/instance_startup.sh"))
@@ -35,18 +36,6 @@ resource "google_project_iam_member" "monitoring-writer" {
 }
 // --- /Service Account Configuration/ ---
 
-// --- /Disk configuration/ ---
-resource "google_compute_disk" "es_disk" {
-  name     = var.vm_elastic_search_disk_name
-  project  = var.project_id
-  type     = local.disk_type
-  snapshot = "https://www.googleapis.com/compute/v1/projects/${var.vm_elastic_search_disk_project}/global/snapshots/${var.vm_elastic_search_disk_name}"
-  size     = local.disk_size
-  labels = {
-    datatype = "elasticsearch"
-  }
-  description = "Precomputed data for Elasticsearch. The disk needs to be mounted and two directories should be exposed to a docker container: `<mnt>/etc/clickhouse-server/config.d` and `<mnt>/etc/clickhouse-server/user.d`"
-}
 // Elastic Search instance template definition --- //
 resource "google_compute_instance_template" "elastic_search_template" {
   project              = var.project_id
@@ -76,12 +65,11 @@ resource "google_compute_instance_template" "elastic_search_template" {
   }
 
   disk {
-    source = google_compute_disk.es_disk.self_link
+    source_image = local.elastic_search_disk
     // mounted under /dev/disk/by-id/google-clickhouse-disk
     device_name = var.vm_elastic_search_disk_name
-    disk_type   = local.disk_type
     mode        = local.disk_mode
-    zone        = var.deployment_region
+    disk_type   = local.disk_type
   }
   network_interface {
     network    = var.network_name

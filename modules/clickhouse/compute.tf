@@ -13,6 +13,7 @@ resource "random_string" "random_ch_vm" {
     clickhouse_template_tags         = join("", sort(local.clickhouse_template_tags)),
     clickhouse_template_machine_type = local.clickhouse_template_machine_type,
     clickhouse_template_source_image = local.clickhouse_template_source_image,
+    clickhouse_disk                  = local.clickhouse_disk,
     vm_flag_preemptible              = var.vm_flag_preemptible,
     vm_startup_script                = md5(file("${path.module}/scripts/instance_startup.sh"))
   }
@@ -37,19 +38,6 @@ resource "google_project_iam_member" "monitoring-writer" {
   member  = "serviceAccount:${google_service_account.gcp_service_acc_apis.email}"
 }
 // --- /Service Account Configuration/ ---
-
-// Disk snapshot with prepared data
-resource "google_compute_disk" "clickhouse_disk" {
-  name     = var.vm_clickhouse_disk_name
-  project  = var.project_id
-  snapshot = "https://www.googleapis.com/compute/v1/projects/${var.vm_clickhouse_disk_project}/global/snapshots/${var.clickhouse_disk_name}"
-  type     = local.disk_type
-  size     = local.disk_size
-  labels = {
-    datatype = "clickhouse"
-  }
-  description = "Precomputed data for Clickhouse database. The disk needs to be mounted and two directories should be exposed to a docker container: `<mnt>/etc/clickhouse-server/config.d` and `<mnt>/etc/clickhouse-server/user.d`"
-}
 
 // Machine Template --- //
 resource "google_compute_instance_template" "clickhouse_template" {
@@ -78,13 +66,12 @@ resource "google_compute_instance_template" "clickhouse_template" {
     boot         = true
     mode         = local.disk_mode
   }
-
   disk {
-    source      = google_compute_disk.clickhouse_disk.self_link
-    device_name = local.disk_device_name
-    disk_type   = local.disk_type
+    source_image = local.clickhouse_disk
+    // mounted under /dev/disk/by-id/google-clickhouse-disk
+    device_name = var.vm_clickhouse_disk_name
     mode        = local.disk_mode
-    zone        = var.deployment_region
+    disk_type   = local.disk_type
   }
 
   network_interface {

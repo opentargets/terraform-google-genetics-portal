@@ -2,9 +2,10 @@
 locals {
 
   // Disk
-  disk_type = "pd-ssd"
-  disk_mode = "READ_WRITE"
-  disk_size = 50
+  elastic_search_disk = "${var.project_id}/${var.vm_elastic_search_disk_name}"
+  disk_type           = "pd-ssd"
+  disk_mode           = "READ_WRITE"
+  disk_size           = 50
   // name used to find disk in running image
   disk_mount_name = "es-disk"
   // Ports
