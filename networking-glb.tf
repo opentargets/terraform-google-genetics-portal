@@ -161,9 +161,9 @@ module "glb" {
         unhealthy_threshold = null
         request_path        = "/admin/health"
         //request_path = "/_ah/health"
-        port         = module.backend_api.api_port
-        host         = null
-        logging      = null
+        port    = module.backend_api.api_port
+        host    = null
+        logging = null
       }
 
       log_config = {
