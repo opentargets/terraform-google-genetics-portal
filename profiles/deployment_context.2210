@@ -1,20 +1,20 @@
 // --- DEVELOPMENT - Deployment Context --- //
-// [--- This is the permanent development deployment context for the Genetics Portal ---]
 // --- Release Information --- //
-config_release_name = "devportal"
+config_release_name = "production"
 
 // --- Deployment Configuration --- //
 config_gcp_default_region = "europe-west1"
 config_gcp_default_zone   = "europe-west1-b"
-config_project_id         = "open-targets-genetics-dev"
-config_deployment_regions = ["europe-west1"]
+config_project_id         = "open-targets-genetics"
+config_deployment_regions = [ "europe-west1", "us-east1" ]
 
 // --- DNS configuration               --- //
-config_dns_project_id            = "open-targets-eu-dev"
-config_dns_subdomain_prefix      = "dev"
-config_dns_managed_zone_name     = "opentargets-xyz"
-config_dns_managed_zone_dns_name = "opentargets.xyz."
-config_dns_api_subdomain         = "api"
+config_dns_project_id                       = "open-targets-prod"
+config_dns_subdomain_prefix                 = null
+config_dns_managed_zone_name                = "opentargets-org"
+config_dns_managed_zone_dns_name            = "opentargets.org."
+config_dns_platform_api_subdomain           = "api"
+
 
 // --- Elastic Search configuration    --- //
 config_vm_elastic_search_image_project  = "open-targets-genetics-dev"
@@ -51,8 +51,8 @@ config_release_month = "10"
 config_webapp_repo_name = "opentargets/ot-ui-apps"
 config_webapp_release   = "v0.2.6"
 config_webapp_deployment_context_map = {
-  DEVOPS_CONTEXT_GENETICS_APP_CONFIG_API_URL = "'https://api.genetics.dev.opentargets.xyz/graphql'"
-  // DEVOPS_CONTEXT_PLATFORM_APP_CONFIG_GOOGLE_TAG_MANAGER_ID = "'GTM-PNQWZ2V'"
+  DEVOPS_CONTEXT_GENETICS_APP_CONFIG_API_URL = "'https://api.genetics.opentargets.org/graphql'"
+  DEVOPS_CONTEXT_GENETICS_APP_CONFIG_GOOGLE_TAG_MANAGER_ID = "'GTM-PNQWZ2V'"
 }
 // Use 'default' robots.txt profile
 //config_webapp_robots_profile                = "production"
@@ -63,7 +63,7 @@ config_enable_inspection = true
 config_enable_ssh        = true
 
 // --- PREEMPTIBLE Configuration --- //
-config_vm_elasticsearch_flag_preemptible = true
+config_vm_elasticsearch_flag_preemptible = false
 config_vm_clickhouse_flag_preemptible    = false
-config_vm_api_flag_preemptible           = true
-config_vm_webserver_flag_preemptible     = true
+config_vm_api_flag_preemptible           = false
+config_vm_webserver_flag_preemptible     = false
