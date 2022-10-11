@@ -148,6 +148,8 @@ module "backend_api" {
   //  INTERNAL   - ILB
   //  NONE      - To not attach a load balancer to the instance groups
   load_balancer_type = "NONE"
+  data_major         = var.config_release_year
+  data_minor         = var.config_release_month
 }
 
 // --- Web Application --- //

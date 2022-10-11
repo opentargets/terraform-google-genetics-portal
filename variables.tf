@@ -38,6 +38,14 @@ variable "config_release_name" {
   type        = string
 }
 
+variable "config_release_year" {
+  description = "Release year"
+  type        = string
+}
+variable "config_release_month" {
+  description = "Release month"
+  type        = string
+}
 // --- DEPLOYMENT CONFIGURATION --- //
 variable "config_gcp_default_region" {
   description = "Default deployment region to use when not specified"

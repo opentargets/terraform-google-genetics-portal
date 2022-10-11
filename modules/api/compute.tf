@@ -94,6 +94,9 @@ resource "google_compute_instance_template" "api_vm_template" {
         ELASTICSEARCH_HOST   = var.backend_connection_map[var.deployment_regions[count.index]].host_elastic_search,
         API_VERSION          = var.vm_api_image_version,
         API_PORT             = local.api_port
+        DATA_MAJOR           = var.data_major
+        DATA_MINOR           = var.data_minor
+        DATA_PATCH           = var.data_patch
       }
     )
     google-logging-enabled = true
