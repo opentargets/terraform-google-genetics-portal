@@ -2,7 +2,7 @@
 locals {
 
   // Disk
-  clickhouse_disk = "${var.project_id}/${var.vm_clickhouse_disk_name}"
+  clickhouse_disk = "${var.vm_clickhouse_disk_project}/${var.vm_clickhouse_disk_name}"
   disk_type       = "pd-ssd"
   disk_mode       = "READ_WRITE"
   disk_size       = 250
