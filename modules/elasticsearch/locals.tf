@@ -2,7 +2,7 @@
 locals {
 
   // Disk
-  elastic_search_disk = "${var.project_id}/${var.vm_elastic_search_disk_name}"
+  elastic_search_disk = "${var.vm_elastic_search_disk_project}/${var.vm_elastic_search_disk_name}"
   disk_type           = "pd-ssd"
   disk_mode           = "READ_WRITE"
   disk_size           = 50
