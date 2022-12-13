@@ -49,7 +49,7 @@ config_release_month = "10"
 
 // --- Web Application configuration   --- //
 config_webapp_repo_name = "opentargets/ot-ui-apps"
-config_webapp_release   = "v0.2.8"
+config_webapp_release   = "v0.2.12"
 config_webapp_deployment_context_map = {
   DEVOPS_CONTEXT_GENETICS_APP_CONFIG_API_URL = "'https://api.genetics.opentargets.org/graphql'"
   DEVOPS_CONTEXT_GENETICS_APP_CONFIG_GOOGLE_TAG_MANAGER_ID = "'GTM-PNQWZ2V'"
