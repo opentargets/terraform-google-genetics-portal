@@ -22,3 +22,5 @@ docker run -d \
     --mount type=bind,source=$ch_user,target=/etc/clickhouse-server/users.d \
     --ulimit nofile=262144:262144 \
     clickhouse/clickhouse-server:${CLICKHOUSE_VERSION}
+
+sleep 300
