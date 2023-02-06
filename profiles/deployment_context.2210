@@ -6,7 +6,7 @@ config_release_name = "production"
 config_gcp_default_region = "europe-west1"
 config_gcp_default_zone   = "europe-west1-b"
 config_project_id         = "open-targets-genetics"
-config_deployment_regions = [ "europe-west1", "us-east1" ]
+config_deployment_regions = [ "europe-west1" ]
 
 // --- DNS configuration               --- //
 config_dns_project_id                       = "open-targets-prod"
@@ -59,7 +59,7 @@ config_webapp_deployment_context_map = {
 config_webapp_webserver_docker_image_version = "1.21.3"
 
 // --- Development features                 --- //
-config_enable_inspection = true
+config_enable_inspection = false
 config_enable_ssh        = true
 
 // --- PREEMPTIBLE Configuration --- //
